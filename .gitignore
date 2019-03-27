@@ -1,0 +1,11 @@
+build
+
+### cscope artifacts ###
+cscope.*
+tags
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
