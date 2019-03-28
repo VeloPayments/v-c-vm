@@ -1,0 +1,50 @@
+pipeline {
+    agent { label 'blockchain-builder' }
+
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '30'))
+        timeout(time: 10, unit: 'MINUTES')
+        timestamps()
+        ansiColor('xterm')
+    }
+
+    stages {
+        stage('Build - Debug') {
+            steps {
+                sshagent(['github-velojenkins']) {
+                    sh '''
+                    #!/bin/sh
+                    export PATH=/opt/vctoolchain/host/bin:$PATH
+                    export LD_LIBRARY_PATH=/opt/vctoolchain/host/lib:/opt/vctoolchain/host/lib64:$LD_LIBRARY_PATH
+
+                    env CC=/opt/vctoolchain/host/bin/gcc CXX=/opt/vctoolchain/host/bin/g++ meson --buildtype=debug build/host/debug
+                    ninja-build -C build/host/debug test
+                    '''
+                }
+            }
+        }
+
+        stage('Build - Release') {
+            steps {
+                sshagent(['github-velojenkins']) {
+                    sh '''
+                    #!/bin/sh
+                    export PATH=/opt/vctoolchain/host/bin:$PATH
+                    export LD_LIBRARY_PATH=/opt/vctoolchain/host/lib:/opt/vctoolchain/host/lib64:$LD_LIBRARY_PATH
+
+                    env CC=/opt/vctoolchain/host/bin/gcc CXX=/opt/vctoolchain/host/bin/g++ meson build/host/release
+                    ninja-build -C build/host/release test
+                    '''    // Shell build step
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            slackSend channel: '#blockchain-ci',
+                 message: "${currentBuild.currentResult} - ${env.STAGE_NAME} ${currentBuild.fullDisplayName} (<${env.RUN_DISPLAY_URL}|Open>)",
+                 color: "${currentBuild.resultIsWorseOrEqualTo('UNSTABLE') ? '#FF0000' : '#65c670'}"
+        }
+    }
+}
