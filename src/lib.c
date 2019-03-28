@@ -1,5 +1,4 @@
-#include <vcvm/lib.h>
-
-void example() {
-    return;
+int example()
+{
+    return 1;
 }

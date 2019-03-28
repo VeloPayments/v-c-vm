@@ -1,1 +1,2 @@
 option('force_velo_toolchain', type : 'boolean', value : true, yield : true)
+option('feature_override', type : 'string', value : '')

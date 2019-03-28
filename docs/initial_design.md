@@ -15,11 +15,13 @@ All bytecode will have the following format for this version (pseudo C)
 ```c
 struct bytecode {
     uint_32 magic_number;
-    uint_32 count;
-    uint_32 instructions[count];
+    uint_32 constant_count;
+    uint_32 constants[constant_count];
+    uint_32 instruction_count;
+    uint_32 instructions[instruction_count];
 }
 ```
-For this version the magic number will be `0x64756d62`.
+For this version the magic number will be `0xDECAF`.
 The content of the structure is not garanteed to be backwards compatible yet.
 
 ## Instruction format
@@ -47,6 +49,10 @@ And just one argument (maybe empty) will be
 
 ## Opcodes
 
-PUSH(A) - Push intermedate value A onto the stack
-POP - Pop the top of the stack
-### TODO
+| Name  | Opcode | Arguments |        Effect         |
+|-------|--------|-----------|-----------------------|
+| Halt  | 0x0    |           | Halt                  |
+| Pop   | 0x1    |           | Pop TOS               |
+| Push  | 0x2    | A         | Push const[A]         |
+| Swap  | 0x3    |           | Swap top two elements |
+
