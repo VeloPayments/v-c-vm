@@ -10,16 +10,22 @@ Initial design document
 
 ## Bytecode format
 
-All bytecode will have the following format for this version (pseudo C)
+All bytecode will have the following format for this version (rough C)
 
 ```c
-struct bytecode {
-    uint_32 magic_number;
-    uint_32 constant_count;
-    uint_32 constants[constant_count];
-    uint_32 instruction_count;
-    uint_32 instructions[instruction_count];
-}
+typedef struct bytecode {
+    uint32_t magic_number; // Should be 0xDECAF.
+    uint32_t string_const_count;
+    char* string_consts[string_const_count];
+    uint32_t uuid_const_count;
+    uint8_t* uuid_consts[uuid_const_count];
+    uint32_t int_const_count;
+    uint32_t* int_consts[int_const_count];
+    uint32_t intrinsic_const_count;
+    intrinsic_t intrinsic_consts[intrinsic_const_count];
+    uint32_t instruction_count;
+    uint32_t instructions[instruction_count];
+} bytecode_t;
 ```
 For this version the magic number will be `0xDECAF`.
 The content of the structure is not garanteed to be backwards compatible yet.
@@ -55,4 +61,5 @@ And just one argument (maybe empty) will be
 | Pop   | 0x1    |           | Pop TOS               |
 | Push  | 0x2    | A         | Push const[A]         |
 | Swap  | 0x3    |           | Swap top two elements |
-
+| Calli | 0x4    | A         | Call the intrinsic[A] |
+| LoadK | 0x5    | A         | Load const[A] to TOS  |
