@@ -25,7 +25,7 @@ endif
 add_project_arguments('-Wall', '-Werror', '-Wextra', language : 'c')
 add_project_arguments('-Wall', '-Werror', '-Wextra', language : 'cpp')
 
-src = run_command('find', './src', '-name', '*.c', check : true).stdout().strip().split('\n')
+src = run_command('find', './src', '-name', '*.c', '-or', '-name', '*.h', check : true).stdout().strip().split('\n')
 test_src = run_command('find', './test', '-name', '*.cpp', check : true).stdout().strip().split('\n')
 
 # testing is currently only used on native x86 builds. Creating a disabler will disable the test exe and test target.
@@ -35,10 +35,17 @@ else
   minunit = dependency('minunit', main : true, required : true)
 endif
 
+vpr = dependency(
+  'vpr',
+  required : true,
+  fallback : ['vpr', 'vpr_dep']
+)
+
 vcvm_include = include_directories('include')
 
 vcvm_lib = static_library('vcvm', src,
-  include_directories : vcvm_include
+  include_directories : vcvm_include,
+  dependencies : [vpr]
 )
 
 vcvm_dep = declare_dependency(
@@ -51,7 +58,7 @@ vcvm_test = executable(
   test_src,
   include_directories : vcvm_include,
   link_with : vcvm_lib,
-  dependencies : minunit
+  dependencies : [minunit, vpr]
 )
 
 test('testvcvm', vcvm_test)

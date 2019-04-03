@@ -4,6 +4,7 @@
 #include <vcvm/intrinsic.h>
 #include <vcvm/bytecode.h>
 
+
 TEST_SUITE(fx);
 
 TEST(basic_fx)
