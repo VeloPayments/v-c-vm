@@ -29,20 +29,26 @@ int bytecode_init(bytecode_t* bytecode, allocator_options_t* allocator_options, 
     result = bytecode_read_integer_constants(bytecode, raw, size, &offset);
     if (result != VCVM_STATUS_SUCCESS)
     {
-        goto done;
+        goto free_integer_constants;
     }
 
     result = bytecode_read_string_constants(bytecode, raw, size, &offset);
     if (result != VCVM_STATUS_SUCCESS)
     {
-        goto done;
+        goto free_string_constants;
     }
 
+free_string_constants:
+    bytecode_dispose_string_constants(bytecode);
+free_integer_constants:
+    bytecode_dispose_integer_constants(bytecode);
 done:
     return result;
 }
 
 void bytecode_dispose(void* ctx)
 {
-    bytecode_t* UNUSED(bytecode) = (bytecode_t*)ctx;
+    bytecode_t* bytecode = (bytecode_t*)ctx;
+    bytecode_dispose_integer_constants(bytecode);
+    bytecode_dispose_string_constants(bytecode);
 }

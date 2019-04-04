@@ -1,7 +1,7 @@
 #include <vcvm/bytecode.h>
 #include <vcvm/error_codes.h>
+#include <string.h>
 #include "bytecode_internal.h"
-
 
 int bytecode_read_integer_constants(bytecode_t* bytecode, const uint8_t* raw, size_t size, size_t* offset)
 {
@@ -23,6 +23,9 @@ int bytecode_read_integer_constants(bytecode_t* bytecode, const uint8_t* raw, si
         goto done;
     }
 
+    // Ensure the space is entirely blanked out
+    memset(bytecode->integers, 0, sizeof(uint32_t) * bytecode->integer_count);
+
     for (uint32_t i = 0; i < bytecode->integer_count; i++)
     {
         uint32_t value;
@@ -36,13 +39,6 @@ int bytecode_read_integer_constants(bytecode_t* bytecode, const uint8_t* raw, si
     goto done;
 
 free_integers:
-    for (uint32_t i = 0; i < bytecode->integer_count; i++)
-    {
-        if ((bytecode->integers + i) != NULL)
-        {
-            release(bytecode->allocator_options, bytecode->integers + i);
-        }
-    }
 
 done:
     return result;
