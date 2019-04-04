@@ -1,5 +1,6 @@
 #include <vcvm/error_codes.h>
 #include <vcvm/bytecode.h>
+#include <string.h>
 #include "bytecode_internal.h"
 
 int bytecode_read_string_constants(bytecode_t* bytecode, const uint8_t* raw, size_t size, size_t* offset)
@@ -17,6 +18,14 @@ int bytecode_read_string_constants(bytecode_t* bytecode, const uint8_t* raw, siz
         bytecode->allocator_options,
         sizeof(char*) * bytecode->string_count);
 
+    if (bytecode->strings == NULL)
+    {
+        result = VCVM_CANT_ALLOCATE;
+        goto done;
+    }
+
+    memset(bytecode->integers, 0, UUID_SIZE * bytecode->artifact_count);
+
     for (uint32_t i = 0; i < bytecode->string_count; i++)
     {
         uint32_t string_size;
@@ -27,6 +36,12 @@ int bytecode_read_string_constants(bytecode_t* bytecode, const uint8_t* raw, siz
         }
 
         char* string = (char*)allocate(bytecode->allocator_options, sizeof(char) * string_size);
+        if (string == NULL)
+        {
+            result = VCVM_CANT_ALLOCATE;
+            goto done;
+        }
+
         result = bytecode_read_string(string, string_size, raw, size, offset);
         if (result != VCVM_STATUS_SUCCESS)
         {

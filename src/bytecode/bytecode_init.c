@@ -38,6 +38,16 @@ int bytecode_init(bytecode_t* bytecode, allocator_options_t* allocator_options, 
         goto free_string_constants;
     }
 
+    result = bytecode_read_artifact_constants(bytecode, raw, size, &offset);
+    if (result != VCVM_STATUS_SUCCESS)
+    {
+        goto free_artifact_constants;
+    }
+
+    goto done;
+
+free_artifact_constants:
+    bytecode_dispose_artifact_constants(bytecode);
 free_string_constants:
     bytecode_dispose_string_constants(bytecode);
 free_integer_constants:

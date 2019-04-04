@@ -10,6 +10,8 @@
 extern "C" {
 #endif  //__cplusplus
 
+#define UUID_SIZE 16
+
 int bytecode_read_uint32(uint32_t* num, const uint8_t* raw, size_t size, size_t* offset);
 int bytecode_read_string(char* str, size_t str_size, const uint8_t* raw, size_t size, size_t* offset);
 int bytecode_read_uuid(uint8_t* uuid, const uint8_t* raw, size_t size, size_t* offset);
