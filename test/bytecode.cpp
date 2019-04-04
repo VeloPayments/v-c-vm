@@ -1,21 +1,42 @@
 #include <minunit/minunit.h>
 #include <cstdint>
-#include <src/bytecode/bytecode_internal.h>
 #include <vcvm/error_codes.h>
+#include <vcvm/bytecode.h>
+#include <string.h>
+#include <vpr/allocator/malloc_allocator.h>
 
 TEST_SUITE(bytecode);
 
-const uint8_t good_magic_number_program[] = {
-        // 0xDECAF
-        0x0, 0x0, 0x0, 0x0, 0x0, 0xD, 0xEC, 0xAF,
+const size_t string_const_size = 28;
+const uint8_t string_const[] = {
+        // 0x00DECAF
+        0x0, 0xD, 0xEC, 0xAF,
+        // 0 integer constants
+        0x0, 0x0, 0x0, 0x0,
+        // 1 string constant,
+        0x0, 0x0, 0x0, 0x2,
+        // length of the first constant
+        0x0, 0x0, 0x0, 0x4,
+        // test
+        0x74, 0x65, 0x73, 0x74,
+        // length of the second constant
+        0x0, 0x0, 0x0, 0x4,
+        // heya
+        0x68, 0x65, 0x79, 0x61
 };
 
-TEST(good_magic_number_program) {
-    uint32_t magic;
-    int result = bytecode_read_magic(&magic, good_magic_number_program, 8);
-    if (result != VCVM_STATUS_SUCCESS)
-    {
+TEST(read_string_const)
+{
+    allocator_options_t allocator_options;
+    malloc_allocator_options_init(&allocator_options);
 
-    }
-    TEST_SUCCESS()
+    bytecode_t bytecode;
+    int result = bytecode_init(&bytecode, &allocator_options, string_const, string_const_size);
+    TEST_ASSERT(result == VCVM_STATUS_SUCCESS);
+
+    TEST_EXPECT(bytecode.string_count == 2);
+    TEST_EXPECT(strcmp(*bytecode.strings, "test") == 0);
+    TEST_EXPECT(strcmp(*(bytecode.strings + 1), "heya") == 0);
+
+    dispose((disposable_t *) &allocator_options);
 }

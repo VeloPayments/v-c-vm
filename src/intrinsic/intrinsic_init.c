@@ -2,9 +2,9 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-static void intrinsic_dispose(void *ctx);
+static void intrinsic_dispose(void* ctx);
 
-int intrinsic_init(intrinsic_t *intrinsic, uuid_t *uuid, uint32_t nargs, uint32_t nrets, intrinsic_method_t method)
+int intrinsic_init(intrinsic_t* intrinsic, uuid_t* uuid, uint32_t nargs, uint32_t nrets, intrinsic_method_t method)
 {
     intrinsic->hdr.dispose = &intrinsic_dispose;
     intrinsic->method = method;
@@ -15,8 +15,8 @@ int intrinsic_init(intrinsic_t *intrinsic, uuid_t *uuid, uint32_t nargs, uint32_
     return 0;
 }
 
-void intrinsic_dispose(void *ctx)
+void intrinsic_dispose(void* ctx)
 {
-    intrinsic_t *intrinsic = (intrinsic_t *) ctx;
+    intrinsic_t* intrinsic = (intrinsic_t*)ctx;
     free(intrinsic->uuid);
 }

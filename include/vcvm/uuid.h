@@ -4,14 +4,14 @@
 #include <stdint.h>
 
 /* make this header C++ friendly. */
-# ifdef     __cplusplus
+#ifdef __cplusplus
 extern "C" {
-#endif    //__cplusplus
+#endif  //__cplusplus
 
 typedef uint8_t uuid_t[16];
 
-# ifdef     __cplusplus
+#ifdef __cplusplus
 }
-#endif    //__cplusplus
+#endif  //__cplusplus
 
 #endif

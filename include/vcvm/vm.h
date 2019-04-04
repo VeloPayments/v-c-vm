@@ -10,9 +10,9 @@
 #include <vcvm/stack_value.h>
 
 /* make this header C++ friendly. */
-#ifdef  __cplusplus
+#ifdef __cplusplus
 extern "C" {
-#endif //__cplusplus
+#endif  //__cplusplus
 
 typedef struct vm
 {
@@ -26,8 +26,8 @@ typedef struct vm
 int vm_init(allocator_options_t* allocator_options, bytecode_t* bytecode);
 
 
-#ifdef     __cplusplus
+#ifdef __cplusplus
 }
-#endif    //__cplusplus
+#endif  //__cplusplus
 
 #endif

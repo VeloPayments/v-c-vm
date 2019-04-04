@@ -6,12 +6,12 @@
 #include <stdint.h>
 
 /* make this header C++ friendly. */
-# ifdef     __cplusplus
+#ifdef __cplusplus
 extern "C" {
-#endif    //__cplusplus
+#endif  //__cplusplus
 
 typedef struct vm vm_t;
-typedef int (*intrinsic_method_t)(vm_t *vm, uint32_t argc, uint32_t* argv);
+typedef int (*intrinsic_method_t)(vm_t* vm, uint32_t argc, uint32_t* argv);
 
 typedef struct intrinsic
 {
@@ -24,8 +24,8 @@ typedef struct intrinsic
 
 int intrinsic_init(intrinsic_t* intrinsic, uuid_t* uuid, uint32_t nargs, uint32_t nrets, intrinsic_method_t method);
 
-# ifdef     __cplusplus
+#ifdef __cplusplus
 }
-#endif    //__cplusplus
+#endif  //__cplusplus
 
 #endif

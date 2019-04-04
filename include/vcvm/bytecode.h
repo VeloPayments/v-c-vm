@@ -7,9 +7,9 @@
 #include <vpr/allocator.h>
 
 /* make this header C++ friendly. */
-# ifdef     __cplusplus
+#ifdef __cplusplus
 extern "C" {
-#endif    //__cplusplus
+#endif  //__cplusplus
 
 typedef struct bytecode
 {
@@ -17,21 +17,32 @@ typedef struct bytecode
     allocator_options_t* allocator_options;
 
     uint32_t magic;
-    uint32_t string_count;
-    uint32_t integer_count;
-    uint32_t intrinsics_count;
-    uint32_t instruction_count;
 
-    char **strings;
-    uint32_t *integers;
-    intrinsic_t **intrinsics;
-    uint32_t *instructions;
+    // Integer constants.
+    uint32_t integer_count;
+    uint32_t* integers;
+
+    // String constants.
+    uint32_t string_count;
+    char** strings;
+
+    // Artifacts (UUIDs)
+    uint32_t artifact_count;
+    uint8_t** artifacts;
+
+    // Intrinsics.
+    uint32_t intrinsics_count;
+    intrinsic_t** intrinsics;
+
+    // Instructions.
+    uint32_t instruction_count;
+    uint32_t* instructions;
 } bytecode_t;
 
 int bytecode_init(bytecode_t* bytecode, allocator_options_t* allocator_options, const uint8_t* raw, size_t size);
 
-# ifdef     __cplusplus
+#ifdef __cplusplus
 }
-#endif    //__cplusplus
+#endif  //__cplusplus
 
 #endif
