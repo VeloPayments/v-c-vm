@@ -1,0 +1,5 @@
+[wrap-git]
+directory = vpr
+revision = head
+url = git@github.com:VeloPayments/vpr.git
+push-url = git@github.com:VeloPayments/vpr.git

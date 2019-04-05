@@ -1,0 +1,5 @@
+[wrap-git]
+directory = vcmodel
+revision = head
+url = git@github.com:velopayments/vcmodel.git
+push-url = git@github.com:velopayments/vcmodel.git
