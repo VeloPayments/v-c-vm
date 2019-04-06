@@ -24,7 +24,7 @@ int bytecode_read_artifact_constants(bytecode_t* bytecode, const uint8_t* raw, s
     }
 
     // Ensure the space is entirely blanked out
-    memset(bytecode->integers, 0, UUID_SIZE * bytecode->artifact_count);
+    memset(bytecode->artifacts, 0, UUID_SIZE * bytecode->artifact_count);
 
     for (uint32_t i = 0; i < bytecode->string_count; i++)
     {

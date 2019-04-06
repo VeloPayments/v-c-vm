@@ -13,7 +13,6 @@ int bytecode_read_string_constants(bytecode_t* bytecode, const uint8_t* raw, siz
     }
 
     // Read out the string constants.
-    // Read out the integer constants.
     bytecode->strings = (char**)allocate(
         bytecode->allocator_options,
         sizeof(char*) * bytecode->string_count);
@@ -24,7 +23,7 @@ int bytecode_read_string_constants(bytecode_t* bytecode, const uint8_t* raw, siz
         goto done;
     }
 
-    memset(bytecode->integers, 0, UUID_SIZE * bytecode->artifact_count);
+    memset(bytecode->strings, 0, sizeof(char*) * bytecode->string_count);
 
     for (uint32_t i = 0; i < bytecode->string_count; i++)
     {

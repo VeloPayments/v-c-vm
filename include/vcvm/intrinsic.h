@@ -19,10 +19,9 @@ typedef struct intrinsic
     uuid_t* uuid;
     uint32_t nargs;
     uint32_t nrets;
-    intrinsic_method_t method;
 } intrinsic_t;
 
-int intrinsic_init(intrinsic_t* intrinsic, uuid_t* uuid, uint32_t nargs, uint32_t nrets, intrinsic_method_t method);
+int intrinsic_init(intrinsic_t* intrinsic, uuid_t* uuid, uint32_t nargs, uint32_t nrets);
 
 #ifdef __cplusplus
 }
