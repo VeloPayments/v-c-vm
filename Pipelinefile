@@ -16,6 +16,7 @@ pipeline {
                     #!/bin/sh
                     export PATH=/opt/vctoolchain/host/bin:$PATH
                     export LD_LIBRARY_PATH=/opt/vctoolchain/host/lib:/opt/vctoolchain/host/lib64:$LD_LIBRARY_PATH
+                    export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig/
 
                     env CC=/opt/vctoolchain/host/bin/gcc CXX=/opt/vctoolchain/host/bin/g++ meson --buildtype=debug build/host/debug
                     ninja-build -C build/host/debug test
@@ -31,6 +32,7 @@ pipeline {
                     #!/bin/sh
                     export PATH=/opt/vctoolchain/host/bin:$PATH
                     export LD_LIBRARY_PATH=/opt/vctoolchain/host/lib:/opt/vctoolchain/host/lib64:$LD_LIBRARY_PATH
+                    export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig/
 
                     env CC=/opt/vctoolchain/host/bin/gcc CXX=/opt/vctoolchain/host/bin/g++ meson build/host/release
                     ninja-build -C build/host/release test
