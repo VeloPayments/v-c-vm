@@ -8,7 +8,9 @@ void bytecode_dispose_intrinsic_constants(bytecode_t* bytecode)
     {
         if ((bytecode->intrinsics + i) != NULL)
         {
-            dispose((disposable_t*) bytecode->intrinsics + i);
+            intrinsic_t* intrinsic = *(bytecode->intrinsics + i);
+            dispose((disposable_t*)intrinsic);
+            release(bytecode->allocator_options, intrinsic);
         }
     }
     release(bytecode->allocator_options, bytecode->intrinsics);
