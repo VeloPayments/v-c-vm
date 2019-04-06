@@ -50,8 +50,16 @@ int bytecode_init(bytecode_t* bytecode, allocator_options_t* allocator_options, 
         goto free_intrinsic_constants;
     }
 
+    result = bytecode_read_instructions(bytecode, raw, size, &offset);
+    if (result != VCVM_STATUS_SUCCESS)
+    {
+        goto free_instructions;
+    }
+
     goto done;
 
+free_instructions:
+    bytecode_dispose_instructions(bytecode);
 free_intrinsic_constants:
     bytecode_dispose_intrinsic_constants(bytecode);
 free_artifact_constants:
@@ -71,4 +79,5 @@ void bytecode_dispose(void* ctx)
     bytecode_dispose_string_constants(bytecode);
     bytecode_dispose_artifact_constants(bytecode);
     bytecode_dispose_intrinsic_constants(bytecode);
+    bytecode_dispose_instructions(bytecode);
 }
