@@ -33,7 +33,7 @@ int bytecode_read_instructions(bytecode_t* bytecode, const uint8_t* raw, size_t 
         {
             goto done;
         }
-        *(bytecode->integers + i) = value;
+        *(bytecode->instructions + i) = value;
     }
 
 done:

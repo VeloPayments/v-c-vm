@@ -105,7 +105,44 @@ const uint8_t intrinsic_constant[] = {
     // No instructions
     0x0, 0x0, 0x0, 0x0};
 
-TEST(read_intrinsic_constant)
+const size_t intruction_constant_size = 40;
+const uint8_t intruction_constant[] = {
+    // 0x00DECAF
+    0x0, 0xD, 0xEC, 0xAF,
+    // 0 integer constants
+    0x0, 0x0, 0x0, 0x0,
+    // No string constants,
+    0x0, 0x0, 0x0, 0x0,
+    // no artifacts
+    0x0, 0x0, 0x0, 0x0,
+    // no intrinsics
+    0x0, 0x0, 0x0, 0x0,
+    // No instructions
+    // 0 integer constants
+    0x0, 0x0, 0x0, 0x2,
+    // 10
+    0x0, 0x0, 0x0, 0xA,
+    // 15
+    0x0, 0x0, 0x0, 0xF};
+
+TEST(read_instructions)
+{
+    allocator_options_t allocator_options;
+    malloc_allocator_options_init(&allocator_options);
+
+    bytecode_t bytecode;
+    int result = bytecode_init(&bytecode, &allocator_options, intruction_constant, intruction_constant_size);
+    TEST_ASSERT(result == VCVM_STATUS_SUCCESS);
+
+    TEST_EXPECT(bytecode.instruction_count == 2);
+    TEST_EXPECT(*(bytecode.instructions) == 10);
+    TEST_EXPECT(*(bytecode.instructions + 1) == 15);
+
+    dispose((disposable_t*)&bytecode);
+    dispose((disposable_t*)&allocator_options);
+}
+
+TEST(read_intrinsics)
 {
     allocator_options_t allocator_options;
     malloc_allocator_options_init(&allocator_options);
@@ -139,7 +176,7 @@ TEST(read_intrinsic_constant)
 }
 
 
-TEST(read_artifact_const)
+TEST(read_artifacts)
 {
     allocator_options_t allocator_options;
     malloc_allocator_options_init(&allocator_options);
@@ -170,7 +207,7 @@ TEST(read_artifact_const)
     dispose((disposable_t*)&allocator_options);
 }
 
-TEST(read_integer_const)
+TEST(read_integers)
 {
     allocator_options_t allocator_options;
     malloc_allocator_options_init(&allocator_options);
@@ -187,7 +224,7 @@ TEST(read_integer_const)
     dispose((disposable_t*)&allocator_options);
 }
 
-TEST(read_string_const)
+TEST(read_strings)
 {
     allocator_options_t allocator_options;
     malloc_allocator_options_init(&allocator_options);

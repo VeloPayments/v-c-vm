@@ -4,12 +4,8 @@
 
 void bytecode_dispose_instructions(bytecode_t* bytecode)
 {
-    for (uint32_t i = 0; i < bytecode->instruction_count; i++)
+    if (bytecode->instructions != NULL)
     {
-        if ((bytecode->instructions + i) != NULL)
-        {
-            release(bytecode->allocator_options, bytecode->instructions + i);
-        }
+        release(bytecode->allocator_options, bytecode->instructions);
     }
-    release(bytecode->allocator_options, bytecode->instructions);
 }
