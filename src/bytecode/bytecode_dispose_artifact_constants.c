@@ -8,7 +8,7 @@ void bytecode_dispose_artifact_constants(bytecode_t* bytecode)
     {
         if ((bytecode->artifacts + i) != NULL)
         {
-            release(bytecode->allocator_options, bytecode->artifacts + i);
+            release(bytecode->allocator_options, *(bytecode->artifacts + i));
         }
     }
     release(bytecode->allocator_options, bytecode->artifacts);

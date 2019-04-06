@@ -15,7 +15,7 @@ int bytecode_read_artifact_constants(bytecode_t* bytecode, const uint8_t* raw, s
     // Read out the integer constants.
     bytecode->artifacts = (uint8_t**)allocate(
         bytecode->allocator_options,
-        UUID_SIZE * bytecode->artifact_count);
+        (sizeof(uint8_t*) * UUID_SIZE) * bytecode->artifact_count);
 
     if (bytecode->artifacts == NULL)
     {
@@ -26,7 +26,7 @@ int bytecode_read_artifact_constants(bytecode_t* bytecode, const uint8_t* raw, s
     // Ensure the space is entirely blanked out
     memset(bytecode->artifacts, 0, UUID_SIZE * bytecode->artifact_count);
 
-    for (uint32_t i = 0; i < bytecode->artifact_count; i++)
+    for (uint8_t i = 0; i < bytecode->artifact_count; i++)
     {
         uint8_t* uuid = (uint8_t*)allocate(bytecode->allocator_options, UUID_SIZE);
         if (uuid == NULL)
@@ -34,6 +34,7 @@ int bytecode_read_artifact_constants(bytecode_t* bytecode, const uint8_t* raw, s
             result = VCVM_CANT_ALLOCATE;
             goto done;
         }
+        memset(uuid, 0, UUID_SIZE);
 
         result = bytecode_read_uuid(uuid, raw, size, offset);
         if (result != VCVM_STATUS_SUCCESS)

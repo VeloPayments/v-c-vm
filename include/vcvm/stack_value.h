@@ -13,7 +13,7 @@ typedef struct stack_value
         STRING,
         INTEGER,
         UUID
-    };
+    } type;
     union
     {
         char* string;
