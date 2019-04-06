@@ -11,4 +11,5 @@ void bytecode_dispose_artifact_constants(bytecode_t* bytecode)
             release(bytecode->allocator_options, bytecode->artifacts + i);
         }
     }
+    release(bytecode->allocator_options, bytecode->artifacts);
 }

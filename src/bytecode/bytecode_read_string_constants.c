@@ -34,12 +34,13 @@ int bytecode_read_string_constants(bytecode_t* bytecode, const uint8_t* raw, siz
             goto done;
         }
 
-        char* string = (char*)allocate(bytecode->allocator_options, sizeof(char) * string_size);
+        char* string = (char*)allocate(bytecode->allocator_options, (sizeof(char) * string_size) + 1);
         if (string == NULL)
         {
             result = VCVM_CANT_ALLOCATE;
             goto done;
         }
+        memset(string, 0, (sizeof(char) * string_size) + 1);
 
         result = bytecode_read_string(string, string_size, raw, size, offset);
         if (result != VCVM_STATUS_SUCCESS)

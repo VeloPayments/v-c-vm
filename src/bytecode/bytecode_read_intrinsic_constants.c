@@ -18,7 +18,7 @@ int bytecode_read_intrinsic_constants(bytecode_t* bytecode, const uint8_t* raw, 
         bytecode->allocator_options,
         sizeof(intrinsic_t*) * bytecode->intrinsics_count);
 
-    if (bytecode->strings == NULL)
+    if (bytecode->intrinsics == NULL)
     {
         result = VCVM_CANT_ALLOCATE;
         goto done;
@@ -28,27 +28,48 @@ int bytecode_read_intrinsic_constants(bytecode_t* bytecode, const uint8_t* raw, 
 
     for (uint32_t i = 0; i < bytecode->intrinsics_count; i++)
     {
-        uint32_t string_size;
-        result = bytecode_read_uint32(&string_size, raw, size, offset);
-        if (result != VCVM_STATUS_SUCCESS)
-        {
-            goto done;
-        }
-
-        char* string = (char*)allocate(bytecode->allocator_options, sizeof(char) * string_size);
-        if (string == NULL)
+        uint8_t* uuid = (uint8_t*)allocate(bytecode->allocator_options, UUID_SIZE);
+        if (uuid == NULL)
         {
             result = VCVM_CANT_ALLOCATE;
             goto done;
         }
 
-        result = bytecode_read_string(string, string_size, raw, size, offset);
+        result = bytecode_read_uuid(uuid, raw, size, offset);
         if (result != VCVM_STATUS_SUCCESS)
         {
             goto done;
         }
 
-        *(bytecode->strings + i) = string;
+        uint32_t nargs;
+        result = bytecode_read_uint32(&nargs, raw, size, offset);
+        if (result != VCVM_STATUS_SUCCESS)
+        {
+            goto done;
+        }
+
+        uint32_t nrets;
+        result = bytecode_read_uint32(&nrets, raw, size, offset);
+        if (result != VCVM_STATUS_SUCCESS)
+        {
+            goto done;
+        }
+
+        intrinsic_t* intrinsic = (intrinsic_t*)allocate(bytecode->allocator_options, sizeof(intrinsic_t*));
+        if (intrinsic == NULL)
+        {
+            result = VCVM_CANT_ALLOCATE;
+            goto done;
+        }
+
+        result = intrinsic_init(intrinsic, bytecode->allocator_options, uuid, nargs, nrets);
+        if (result != VCVM_STATUS_SUCCESS)
+        {
+            release(bytecode->allocator_options, uuid);
+            goto done;
+        }
+
+        *(bytecode->intrinsics + i) = intrinsic;
     }
 
 done:

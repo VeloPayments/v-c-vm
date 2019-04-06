@@ -69,4 +69,6 @@ void bytecode_dispose(void* ctx)
     bytecode_t* bytecode = (bytecode_t*)ctx;
     bytecode_dispose_integer_constants(bytecode);
     bytecode_dispose_string_constants(bytecode);
+    bytecode_dispose_artifact_constants(bytecode);
+    bytecode_dispose_intrinsic_constants(bytecode);
 }

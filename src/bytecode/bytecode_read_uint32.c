@@ -10,9 +10,9 @@ int bytecode_read_uint32(uint32_t* count, const uint8_t* raw, size_t size, size_
     {
         return VCVM_BYTECODE_NOT_ENOUGH_BYTES;
     }
-    uint32_t magic;
-    memcpy(&magic, raw + *offset, sizeof(uint32_t));
+    uint32_t number;
+    memcpy(&number, raw + *offset, sizeof(uint32_t));
     *offset += sizeof(uint32_t);
-    *count = ntohl(magic);
+    *count = ntohl(number);
     return VCVM_STATUS_SUCCESS;
 }

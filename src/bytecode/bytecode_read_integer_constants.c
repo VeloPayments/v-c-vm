@@ -32,14 +32,11 @@ int bytecode_read_integer_constants(bytecode_t* bytecode, const uint8_t* raw, si
         result = bytecode_read_uint32(&value, raw, size, offset);
         if (result != VCVM_STATUS_SUCCESS)
         {
-            goto free_integers;
+            goto done;
         }
         *(bytecode->integers + i) = value;
     }
     goto done;
-
-free_integers:
-
 done:
     return result;
 }

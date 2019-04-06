@@ -11,4 +11,5 @@ void bytecode_dispose_integer_constants(bytecode_t* bytecode)
             release(bytecode->allocator_options, bytecode->integers + i);
         }
     }
+    release(bytecode->allocator_options, bytecode->integers);
 }

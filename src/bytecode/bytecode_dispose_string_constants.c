@@ -8,7 +8,8 @@ void bytecode_dispose_string_constants(bytecode_t* bytecode)
     {
         if ((bytecode->strings + i) != NULL)
         {
-            release(bytecode->allocator_options, bytecode->strings + i);
+            release(bytecode->allocator_options, *(bytecode->strings + i));
         }
     }
+    release(bytecode->allocator_options, bytecode->strings);
 }

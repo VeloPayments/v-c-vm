@@ -7,7 +7,7 @@
 
 TEST_SUITE(bytecode);
 
-const size_t string_const_size = 28;
+const size_t string_const_size = 36;
 const uint8_t string_const[] = {
         // 0x00DECAF
         0x0, 0xD, 0xEC, 0xAF,
@@ -22,7 +22,11 @@ const uint8_t string_const[] = {
         // length of the second constant
         0x0, 0x0, 0x0, 0x4,
         // heya
-        0x68, 0x65, 0x79, 0x61
+        0x68, 0x65, 0x79, 0x61,
+        // No artifacts
+        0x0, 0x0, 0x0, 0x0,
+        // No intrinsics
+        0x0, 0x0, 0x0, 0x0
 };
 
 TEST(read_string_const)
@@ -38,5 +42,6 @@ TEST(read_string_const)
     TEST_EXPECT(strcmp(*bytecode.strings, "test") == 0);
     TEST_EXPECT(strcmp(*(bytecode.strings + 1), "heya") == 0);
 
+    dispose((disposable_t *) &bytecode);
     dispose((disposable_t *) &allocator_options);
 }
