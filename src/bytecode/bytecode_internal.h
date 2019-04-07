@@ -11,6 +11,7 @@ extern "C" {
 #endif  //__cplusplus
 
 #define UUID_SIZE 16
+#define INTRINSIC_SIZE (UUID_SIZE + sizeof(uint32_t) + sizeof(uint32_t))
 
 int bytecode_read_uint32(uint32_t* num, const uint8_t* raw, size_t size, size_t* offset);
 int bytecode_read_string(char* str, size_t str_size, const uint8_t* raw, size_t size, size_t* offset);
@@ -20,7 +21,7 @@ int bytecode_read_instructions(bytecode_t* bytecode, const uint8_t* raw, size_t 
 int bytecode_read_string_constants(bytecode_t* bytecode, const uint8_t* raw, size_t size, size_t* offset);
 int bytecode_read_integer_constants(bytecode_t* bytecode, const uint8_t* raw, size_t size, size_t* offset);
 int bytecode_read_artifact_constants(bytecode_t* bytecode, const uint8_t* raw, size_t size, size_t* offset);
-int bytecode_read_intrinsic_constants(bytecode_t* bytecode, const uint8_t* raw, size_t size, size_t* offset);
+int bytecode_read_intrinsic_constants(bytecode_t* bytecode, const uint8_t* raw, size_t size, size_t* offset, resolve_intrinsic_delegate_t pFunction);
 
 void bytecode_dispose_instructions(bytecode_t* bytecode);
 void bytecode_dispose_string_constants(bytecode_t* bytecode);

@@ -18,28 +18,23 @@ typedef struct bytecode
 
     uint32_t magic;
 
-    // Integer constants.
     uint32_t integer_count;
     uint32_t* integers;
 
-    // String constants.
     uint32_t string_count;
     char** strings;
 
-    // Artifacts (UUIDs)
     uint32_t artifact_count;
     uint8_t** artifacts;
 
-    // Intrinsics.
     uint32_t intrinsics_count;
     intrinsic_t** intrinsics;
 
-    // Instructions.
     uint32_t instruction_count;
     uint32_t* instructions;
 } bytecode_t;
 
-int bytecode_init(bytecode_t* bytecode, allocator_options_t* allocator_options, const uint8_t* raw, size_t size);
+int bytecode_init(bytecode_t* bytecode, allocator_options_t* allocator_options, const uint8_t* raw, size_t size, resolve_intrinsic_delegate_t resolve);
 
 #ifdef __cplusplus
 }

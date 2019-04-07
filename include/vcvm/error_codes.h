@@ -12,6 +12,8 @@ extern "C" {
 
 #define VCVM_BYTECODE_BAD_MAGIC 0x1001
 
+#define VCVM_INTRINSIC_NOT_FOUND 0x2000
+
 #define VCVM_CANT_ALLOCATE 0xF000
 
 #ifdef __cplusplus

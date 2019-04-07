@@ -26,7 +26,7 @@ add_project_arguments('-Wall', '-Werror', '-Wextra', language : 'c')
 add_project_arguments('-Wall', '-Werror', '-Wextra', language : 'cpp')
 
 src = run_command('find', './src', '-name', '*.c', '-or', '-name', '*.h', check : true).stdout().strip().split('\n')
-test_src = run_command('find', './test', '-name', '*.cpp', check : true).stdout().strip().split('\n')
+test_src = run_command('find', './test', '-name', '*.cpp', '-or', '-name', '*.h', check : true).stdout().strip().split('\n')
 
 # testing is currently only used on native x86 builds. Creating a disabler will disable the test exe and test target.
 if meson.is_cross_build()

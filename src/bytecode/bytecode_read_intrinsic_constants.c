@@ -5,9 +5,8 @@
 #include <string.h>
 #include "bytecode_internal.h"
 
-#define INTRINSIC_SIZE (UUID_SIZE + sizeof(uint32_t) + sizeof(uint32_t))
 
-int bytecode_read_intrinsic_constants(bytecode_t* bytecode, const uint8_t* raw, size_t size, size_t* offset)
+int bytecode_read_intrinsic_constants(bytecode_t* bytecode, const uint8_t* raw, size_t size, size_t* offset, resolve_intrinsic_delegate_t resolve)
 {
     int result = bytecode_read_uint32(&bytecode->intrinsics_count, raw, size, offset);
     if (result != VCVM_STATUS_SUCCESS)
@@ -34,12 +33,7 @@ int bytecode_read_intrinsic_constants(bytecode_t* bytecode, const uint8_t* raw, 
             return VCVM_BYTECODE_NOT_ENOUGH_BYTES;
         }
 
-        uint8_t* uuid = (uint8_t*)allocate(bytecode->allocator_options, UUID_SIZE);
-        if (uuid == NULL)
-        {
-            result = VCVM_CANT_ALLOCATE;
-            goto done;
-        }
+        uint8_t uuid[16];
 
         result = bytecode_read_uuid(uuid, raw, size, offset);
         if (result != VCVM_STATUS_SUCCESS)
@@ -61,20 +55,14 @@ int bytecode_read_intrinsic_constants(bytecode_t* bytecode, const uint8_t* raw, 
             goto done;
         }
 
-        intrinsic_t* intrinsic = (intrinsic_t*)allocate(bytecode->allocator_options, sizeof(intrinsic_t));
-        if (intrinsic == NULL)
-        {
-            result = VCVM_CANT_ALLOCATE;
-            goto done;
-        }
-
-        result = intrinsic_init(intrinsic, bytecode->allocator_options, uuid, nargs, nrets);
+        intrinsic_t* intrinsic = NULL;
+        result = resolve(&intrinsic, uuid, nargs, nrets);
         if (result != VCVM_STATUS_SUCCESS)
         {
-            release(bytecode->allocator_options, uuid);
             goto done;
         }
 
+        memset(uuid, 0, UUID_SIZE);
         *(bytecode->intrinsics + i) = intrinsic;
     }
 

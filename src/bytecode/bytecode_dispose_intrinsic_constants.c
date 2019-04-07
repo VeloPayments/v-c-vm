@@ -4,14 +4,7 @@
 
 void bytecode_dispose_intrinsic_constants(bytecode_t* bytecode)
 {
-    for (uint32_t i = 0; i < bytecode->intrinsics_count; i++)
-    {
-        if ((bytecode->intrinsics + i) != NULL)
-        {
-            intrinsic_t* intrinsic = *(bytecode->intrinsics + i);
-            dispose((disposable_t*)intrinsic);
-            release(bytecode->allocator_options, intrinsic);
-        }
-    }
+    // Release the pointer to the pointers but don't release the pointers themselves.
+    // We don't own them and they are just on loan.
     release(bytecode->allocator_options, bytecode->intrinsics);
 }

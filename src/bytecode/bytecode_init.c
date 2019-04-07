@@ -1,12 +1,13 @@
 #include <vcvm/bytecode.h>
 #include <vpr/parameters.h>
 #include <vcvm/error_codes.h>
+#include <string.h>
 
 #include "bytecode_internal.h"
 
 static void bytecode_dispose(void* ctx);
 
-int bytecode_init(bytecode_t* bytecode, allocator_options_t* allocator_options, const uint8_t* raw, size_t size)
+int bytecode_init(bytecode_t* bytecode, allocator_options_t* allocator_options, const uint8_t* raw, size_t size, resolve_intrinsic_delegate_t resolve)
 {
     bytecode->hdr.dispose = &bytecode_dispose;
     bytecode->allocator_options = allocator_options;
@@ -44,7 +45,7 @@ int bytecode_init(bytecode_t* bytecode, allocator_options_t* allocator_options, 
         goto free_artifact_constants;
     }
 
-    result = bytecode_read_intrinsic_constants(bytecode, raw, size, &offset);
+    result = bytecode_read_intrinsic_constants(bytecode, raw, size, &offset, resolve);
     if (result != VCVM_STATUS_SUCCESS)
     {
         goto free_intrinsic_constants;
