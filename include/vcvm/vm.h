@@ -18,12 +18,15 @@ typedef struct vm
 {
     disposable_t hdr;
     allocator_options_t* allocator_options;
-    uint32_t sp;
     stack_value_t* stack[MAX_STACK_SIZE];
     bytecode_t* bytecode;
+    uint32_t sp;
+    uint32_t ip;
 } vm_t;
 
 int vm_init(vm_t* vm, allocator_options_t* allocator_options, bytecode_t* bytecode);
+int vm_step(vm_t* vm);
+
 int vm_run_til_complete(void);
 
 #ifdef __cplusplus
