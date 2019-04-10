@@ -13,22 +13,22 @@ int bytecode_read_instructions(bytecode_t* bytecode, const uint8_t* raw, size_t 
         goto done;
     }
 
-    bytecode->instructions = (uint32_t *)allocate(
+    bytecode->instructions = (uint8_t *)allocate(
         bytecode->allocator_options,
-        sizeof(uint32_t) * bytecode->instruction_count);
+        sizeof(uint8_t) * bytecode->instruction_count);
 
-    if (bytecode->intrinsics == NULL)
+    if (bytecode->instructions == NULL)
     {
         result = VCVM_CANT_ALLOCATE;
         goto done;
     }
 
-    memset(bytecode->instructions, 0, sizeof(uint32_t) * bytecode->instruction_count);
+    memset(bytecode->instructions, 0, sizeof(uint8_t) * bytecode->instruction_count);
 
-    for (uint32_t i = 0; i < bytecode->instruction_count; i++)
+    for (uint8_t i = 0; i < bytecode->instruction_count; i++)
     {
-        uint32_t value;
-        result = bytecode_read_uint32(&value, raw, size, offset);
+        uint8_t value;
+        result = bytecode_read_uint8(&value, raw, size, offset);
         if (result != VCVM_STATUS_SUCCESS)
         {
             goto done;

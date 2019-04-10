@@ -1,7 +1,6 @@
 #include <vcvm/vm.h>
 #include <vcvm/error_codes.h>
 #include <vcvm/instruction.h>
-#include <vcvm/opcode.h>
 
 static void vm_dispose(void* ctx);
 

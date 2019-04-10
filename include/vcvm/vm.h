@@ -26,11 +26,12 @@ typedef struct vm
 
 int vm_init(vm_t* vm, allocator_options_t* allocator_options, bytecode_t* bytecode);
 int vm_step(vm_t* vm);
-instruction_t* vm_decode_opcode(vm_t* vm);
+const instruction_t* vm_decode_opcode(vm_t* vm);
+int vm_decode_and_execute_arity_0(vm_t* vm, const instruction_t* instr);
 int vm_decode_and_execute_arity_1(vm_t* vm, const instruction_t* instr);
 int vm_decode_and_execute_arity_2(vm_t* vm, const instruction_t* instr);
 int vm_decode_and_execute_arity_3(vm_t* vm, const instruction_t* instr);
-int vm_run_til_complete(void);
+int vm_run_til_complete(vm_t* vm);
 
 #ifdef __cplusplus
 }

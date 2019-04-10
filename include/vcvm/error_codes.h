@@ -14,6 +14,8 @@ extern "C" {
 
 #define VCVM_INTRINSIC_NOT_FOUND 0x2000
 
+#define VCVM_VM_BAD_ARITY 0x3001
+
 #define VCVM_CANT_ALLOCATE 0xF000
 
 #ifdef __cplusplus

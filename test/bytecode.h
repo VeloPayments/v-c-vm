@@ -104,7 +104,7 @@ const uint8_t intrinsic_constant[] = {
     // No instructions
     0x0, 0x0, 0x0, 0x0};
 
-const size_t intruction_constant_size = 40;
+const size_t intruction_constant_size = 26;
 const uint8_t intruction_constant[] = {
     // 0x00DECAF
     0x0, 0xD, 0xEC, 0xAF,
@@ -116,13 +116,9 @@ const uint8_t intruction_constant[] = {
     0x0, 0x0, 0x0, 0x0,
     // no intrinsics
     0x0, 0x0, 0x0, 0x0,
-    // No instructions
-    // 0 integer constants
+    // 2 instructions
     0x0, 0x0, 0x0, 0x2,
-    // 10
-    0x0, 0x0, 0x0, 0xA,
-    // 15
-    0x0, 0x0, 0x0, 0xF};
+    0xA, 0xF};
 
 
 #ifdef __cplusplus

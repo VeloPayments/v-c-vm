@@ -2,8 +2,9 @@
 #include <vcvm/intrinsic.h>
 #include <include/vcvm/vm.h>
 
-instruction_t *vm_decode_opcode(vm_t *vm)
+const instruction_t *vm_decode_opcode(vm_t *vm)
 {
+    uint8_t opcode = (*vm->bytecode->instructions) & 0xFF;
     vm->bytecode->instructions++;
-    return NULL;
+    return opcodes[opcode];
 }
