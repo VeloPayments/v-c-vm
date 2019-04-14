@@ -13,7 +13,7 @@ int bytecode_read_instructions(bytecode_t* bytecode, const uint8_t* raw, size_t 
         goto done;
     }
 
-    bytecode->instructions = (uint32_t *)allocate(
+    bytecode->instructions = (uint32_t*)allocate(
         bytecode->allocator_options,
         sizeof(uint32_t) * bytecode->instruction_count);
 

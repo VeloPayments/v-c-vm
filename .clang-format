@@ -10,7 +10,6 @@ BraceWrapping:
   BeforeElse: true
 BreakBeforeBinaryOperators: None
 BreakBeforeBraces: Custom
-Cpp11BracedListStyle: true
 IndentCaseLabels: true
 IndentPPDirectives: None
 MaxEmptyLinesToKeep: 2

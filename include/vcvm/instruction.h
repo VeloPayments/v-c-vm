@@ -54,7 +54,6 @@ static const instruction_t HALT = {
 };
 
 
-
 #ifdef __cplusplus
 }
 #endif  //__cplusplus
