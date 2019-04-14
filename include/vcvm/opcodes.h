@@ -9,8 +9,11 @@ extern "C" {
 #include <vcvm/instruction.h>
 
 // This is left on separate lines for a reason.
-const instruction_t* opcodes[256] = {
+static const instruction_t* opcodes[256] = {
     &NOP,
+    &POP,
+    &SWAP,
+    &DUP,
     &INVALID,
     &INVALID,
     &INVALID,
@@ -18,11 +21,8 @@ const instruction_t* opcodes[256] = {
     &INVALID,
     &INVALID,
     &INVALID,
-    &INVALID,
-    &INVALID,
-    &INVALID,
-    &INVALID,
-    &INVALID,
+    &LOAD_CONST_STRING, // 11
+    &LOAD_CONST_INT,
     &INVALID,
     &INVALID,
     &INVALID,
