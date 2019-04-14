@@ -4,7 +4,7 @@
 
 const instruction_t *vm_decode_opcode(vm_t *vm)
 {
-    uint8_t opcode = (*vm->bytecode->instructions) & 0xFF;
-    vm->bytecode->instructions++;
+    uint32_t i = *(vm->bytecode->instructions + vm->ip);
+    uint8_t opcode = (i & (uint16_t) 0xFF000000) >> (uint8_t) 24;
     return opcodes[opcode];
 }

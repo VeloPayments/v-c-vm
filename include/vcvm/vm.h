@@ -22,6 +22,7 @@ typedef struct vm
     stack_value_t* stack[MAX_STACK_SIZE];
     bytecode_t* bytecode;
     uint32_t sp;
+    uint32_t ip;
 } vm_t;
 
 int vm_init(vm_t* vm, allocator_options_t* allocator_options, bytecode_t* bytecode);
