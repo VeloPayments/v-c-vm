@@ -16,6 +16,10 @@ extern "C" {
 
 #define VCVM_VM_BAD_ARITY 0x3001
 
+#define VCVM_VM_INVALID_OPCODE 0x3002
+
+#define VCVM_VM_HALT 0x3003
+
 #define VCVM_CANT_ALLOCATE 0xF000
 
 #ifdef __cplusplus
