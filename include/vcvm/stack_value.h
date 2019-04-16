@@ -1,5 +1,5 @@
-#ifndef BUILD_VALUE_HEADER_GUARD
-#define BUILD_STACK_VALUE_HEADER_GUARD
+#ifndef VCVM_STACK_VALUE_HEADER_GUARD
+#define VCVM_STACK_VALUE_HEADER_GUARD
 
 /* make this header C++ friendly. */
 #ifdef __cplusplus
@@ -10,9 +10,9 @@ typedef struct stack_value
 {
     enum type
     {
-        STRING,
-        INTEGER,
-        UUID
+        STACK_VALUE_TYPE_STRING,
+        STACK_VALUE_TYPE_INTEGER,
+        STACK_VALUE_TYPE_UUID
     } type;
     union
     {

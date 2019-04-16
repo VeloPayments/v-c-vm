@@ -68,7 +68,7 @@ And just one argument (maybe empty) will be
 
 Intrinsics are a way to support arbitrary built in functions. Rather than making the Opcodes a mess
 we can simply support any number of functions by exposing well known references. To keep things deterministic 
-an intrinsic will be referenced by a UUID, this UUID gives it a deterministic name and version binding. We can 
+an intrinsic will be referenced by a STACK_VALUE_TYPE_UUID, this STACK_VALUE_TYPE_UUID gives it a deterministic name and version binding. We can 
 bind multiple methods of the same action to different UUIDs and let the user decide what method they bind against.
 
 (Python pseudo code)
@@ -93,7 +93,7 @@ typedef struct intrinsic {
 In the future this will be extended to support type information on arguments allowing for stricter matching.
 
 When the virtual machine loads some bytecode it will scan the intrinsics pool and see if it can match the intrinsics requested
-to loaded methods. First it will check if there is an intrinsic loaded for a given UUID. It will then compare `nargs` and `nrets` 
+to loaded methods. First it will check if there is an intrinsic loaded for a given STACK_VALUE_TYPE_UUID. It will then compare `nargs` and `nrets` 
 if they match then this is enough for us to load that into the vm for use during execution.
 
 In bytecode an intrinsic might work like so (just a pseudo example)
