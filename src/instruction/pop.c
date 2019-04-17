@@ -5,11 +5,6 @@
 
 int pop(vm_t* vm)
 {
-    if (vm->sp + 1 >= MAX_STACK_SIZE)
-    {
-        return VCVM_VM_STACKOVERFLOW;
-    }
-
-    vm->sp++;
+    vm->sp--;
     return VCVM_STATUS_SUCCESS;
 }

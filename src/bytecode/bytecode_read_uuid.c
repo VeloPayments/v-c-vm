@@ -10,7 +10,7 @@ int bytecode_read_uuid(uint8_t* uuid, const uint8_t* raw, size_t size, size_t* o
 {
     if (*offset + UUID_SIZE > size)
     {
-        return VCVM_BYTECODE_NOT_ENOUGH_BYTES;
+        return VCVM_ERROR_BYTECODE_NOT_ENOUGH_BYTES;
     }
     memcpy(uuid, raw + *offset, UUID_SIZE);
     *offset += UUID_SIZE;

@@ -19,7 +19,7 @@ int bytecode_read_artifact_constants(bytecode_t* bytecode, const uint8_t* raw, s
 
     if (bytecode->artifacts == NULL)
     {
-        result = VCVM_CANT_ALLOCATE;
+        result = VCVM_ERROR_CANT_ALLOCATE;
         goto done;
     }
 
@@ -31,7 +31,7 @@ int bytecode_read_artifact_constants(bytecode_t* bytecode, const uint8_t* raw, s
         uint8_t* uuid = (uint8_t*)allocate(bytecode->allocator_options, UUID_SIZE);
         if (uuid == NULL)
         {
-            result = VCVM_CANT_ALLOCATE;
+            result = VCVM_ERROR_CANT_ALLOCATE;
             goto done;
         }
         memset(uuid, 0, UUID_SIZE);

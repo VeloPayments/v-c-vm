@@ -22,7 +22,7 @@ int vm_step(vm_t* vm)
             result = vm_decode_and_execute_arity_3(vm, instr);
             break;
         default:
-            result = VCVM_VM_BAD_ARITY;
+            result = VCVM_ERROR_VM_BAD_ARITY;
             break;
     }
 

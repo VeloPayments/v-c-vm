@@ -4,7 +4,7 @@
 #include <vcvm/stack_value.h>
 #include <vpr/parameters.h>
 
-int multiply(vm_t* vm)
+int add(vm_t* vm)
 {
     stack_value_t* left = vm->stack[vm->sp - 1];
     stack_value_t* right = vm->stack[vm->sp];
@@ -21,7 +21,7 @@ int multiply(vm_t* vm)
     }
 
     stack_value_init(value, vm->allocator_options);
-    stack_value_set_int(value, left->integer * right->integer);
+    stack_value_set_int(value, left->integer + right->integer);
 
     dispose((disposable_t*)left);
     dispose((disposable_t*)right);

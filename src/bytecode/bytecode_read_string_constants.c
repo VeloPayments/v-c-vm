@@ -19,7 +19,7 @@ int bytecode_read_string_constants(bytecode_t* bytecode, const uint8_t* raw, siz
 
     if (bytecode->strings == NULL)
     {
-        result = VCVM_CANT_ALLOCATE;
+        result = VCVM_ERROR_CANT_ALLOCATE;
         goto done;
     }
 
@@ -37,7 +37,7 @@ int bytecode_read_string_constants(bytecode_t* bytecode, const uint8_t* raw, siz
         char* string = (char*)allocate(bytecode->allocator_options, (sizeof(char) * string_size) + 1);
         if (string == NULL)
         {
-            result = VCVM_CANT_ALLOCATE;
+            result = VCVM_ERROR_CANT_ALLOCATE;
             goto done;
         }
         memset(string, 0, (sizeof(char) * string_size) + 1);

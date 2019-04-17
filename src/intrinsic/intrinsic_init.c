@@ -6,13 +6,14 @@
 
 static void intrinsic_dispose(void* ctx);
 
-int intrinsic_init(intrinsic_t* intrinsic, allocator_options_t* allocator_options, uint8_t* uuid, uint32_t nargs, uint32_t nrets)
+int intrinsic_init(intrinsic_t* intrinsic, allocator_options_t* allocator_options, uint8_t* uuid, uint32_t nargs, uint32_t nrets, intrinsic_method_t method)
 {
     intrinsic->hdr.dispose = &intrinsic_dispose;
     intrinsic->allocator_options = allocator_options;
     intrinsic->uuid = uuid;
     intrinsic->nargs = nargs;
     intrinsic->nrets = nrets;
+    intrinsic->method = method;
 
     return VCVM_STATUS_SUCCESS;
 }

@@ -20,7 +20,7 @@ int bytecode_read_intrinsic_constants(bytecode_t* bytecode, const uint8_t* raw, 
 
     if (bytecode->intrinsics == NULL)
     {
-        result = VCVM_CANT_ALLOCATE;
+        result = VCVM_ERROR_CANT_ALLOCATE;
         goto done;
     }
 
@@ -30,7 +30,7 @@ int bytecode_read_intrinsic_constants(bytecode_t* bytecode, const uint8_t* raw, 
     {
         if (*offset + INTRINSIC_SIZE > size)
         {
-            return VCVM_BYTECODE_NOT_ENOUGH_BYTES;
+            return VCVM_ERROR_BYTECODE_NOT_ENOUGH_BYTES;
         }
 
         uint8_t uuid[16];

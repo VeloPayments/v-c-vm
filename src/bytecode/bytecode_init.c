@@ -23,7 +23,7 @@ int bytecode_init(bytecode_t* bytecode, allocator_options_t* allocator_options, 
 
     if (bytecode->magic != 0xDECAF)
     {
-        result = VCVM_BYTECODE_BAD_MAGIC;
+        result = VCVM_ERROR_BYTECODE_BAD_MAGIC;
         goto done;
     }
 

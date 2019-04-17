@@ -32,19 +32,25 @@ static void fake_dispose(void* UNUSED(ctx))
 
 static uint8_t uuid1[16] = {UUID_1};
 static uint8_t uuid2[16] = {UUID_2};
+
+
+
 static intrinsic_t intrinsic_1 = {
     .hdr = disposable {.dispose = &fake_dispose},
     .allocator_options = nullptr,
     .uuid = uuid1,
     .nargs = 2,
     .nrets = 4,
+    .method = nullptr,
 };
+
 static intrinsic_t intrinsic_2 = {
     .hdr = disposable {.dispose = &fake_dispose},
     .allocator_options = nullptr,
     .uuid = uuid2,
     .nargs = 4,
     .nrets = 8,
+    .method = nullptr,
 };
 
 static int resolve_test_intrinsics(intrinsic_t** intrinsic, uint8_t* uuid, uint32_t UNUSED(nargs), uint32_t UNUSED(nrets))
@@ -59,7 +65,7 @@ static int resolve_test_intrinsics(intrinsic_t** intrinsic, uint8_t* uuid, uint3
         *intrinsic = &intrinsic_2;
         return VCVM_STATUS_SUCCESS;
     }
-    return VCVM_INTRINSIC_NOT_FOUND;
+    return VCVM_ERROR_INTRINSIC_NOT_FOUND;
 }
 
 TEST(read_intrinsics)

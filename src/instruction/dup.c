@@ -7,7 +7,7 @@ int dup(vm_t* vm)
 {
     if (vm->sp + 1 >= MAX_STACK_SIZE)
     {
-        return VCVM_VM_STACKOVERFLOW;
+        return VCVM_ERROR_VM_STACKOVERFLOW;
     }
 
     vm->sp++;

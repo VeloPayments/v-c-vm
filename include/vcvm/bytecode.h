@@ -19,13 +19,13 @@ typedef struct bytecode
     uint32_t magic;
 
     uint32_t integer_count;
-    uint32_t* integers;
+    int32_t* integers;
 
     uint32_t string_count;
     char** strings;
 
     uint32_t artifact_count;
-    uint8_t** artifacts;
+    uint8_t ** artifacts;
 
     uint32_t intrinsics_count;
     intrinsic_t** intrinsics;

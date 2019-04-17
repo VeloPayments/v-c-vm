@@ -4,5 +4,5 @@
 
 int invalid(vm_t* UNUSED(vm))
 {
-    return VCVM_VM_INVALID_OPCODE;
+    return VCVM_ERROR_VM_INVALID_OPCODE;
 }

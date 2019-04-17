@@ -4,5 +4,5 @@
 
 int halt(vm_t* UNUSED(vm))
 {
-    return VCVM_VM_HALT;
+    return VCVM_ERROR_VM_HALT;
 }

@@ -19,7 +19,7 @@ int bytecode_read_instructions(bytecode_t* bytecode, const uint8_t* raw, size_t 
 
     if (bytecode->instructions == NULL)
     {
-        result = VCVM_CANT_ALLOCATE;
+        result = VCVM_ERROR_CANT_ALLOCATE;
         goto done;
     }
 
