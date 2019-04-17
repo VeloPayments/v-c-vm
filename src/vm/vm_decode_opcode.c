@@ -1,7 +1,6 @@
 #include <vcvm/instruction.h>
 #include <vcvm/intrinsic.h>
 #include <vcvm/vm.h>
-#include <vcvm/opcodes.h>
 
 const instruction_t* vm_decode_opcode(vm_t* vm)
 {

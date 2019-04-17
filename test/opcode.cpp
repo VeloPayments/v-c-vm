@@ -3,7 +3,6 @@
 #include <cstring>
 #include <netinet/in.h>
 #include <vcvm/instruction.h>
-#include <vcvm/opcodes.h>
 
 TEST_SUITE(opcode);
 

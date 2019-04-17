@@ -17,6 +17,7 @@ typedef int (*arity3_t)(vm_t* vm, uint8_t a, uint8_t b, uint8_t c);
 
 typedef struct instruction
 {
+    const char* name;
     const uint8_t arity;
     const union
     {
@@ -53,152 +54,29 @@ int load_const_artifact(vm_t* vm, uint32_t a);
 
 int call_intrinsic(vm_t* vm, uint32_t a);
 
-const instruction_t NOP = {
-    .arity = 0,
-    .handler = {
-        .arity0 = &nop,
-    }
-};
+extern const instruction_t NOP;
+extern const instruction_t INVALID;
+extern const instruction_t HALT;
+extern const instruction_t POP;
+extern const instruction_t SWAP;
+extern const instruction_t DUP;
+extern const instruction_t MULTIPLY;
+extern const instruction_t POWER;
+extern const instruction_t DIVIDE;
+extern const instruction_t MODULO;
+extern const instruction_t ADD;
+extern const instruction_t SUBTRACT;
+extern const instruction_t LSHIFT;
+extern const instruction_t RSHIFT;
+extern const instruction_t AND_;
+extern const instruction_t OR_;
+extern const instruction_t XOR_;
+extern const instruction_t LOAD_CONST_STRING;
+extern const instruction_t LOAD_CONST_INT;
+extern const instruction_t LOAD_CONST_ARTIFACT;
+extern const instruction_t CALL_INTRINSIC;
 
-const instruction_t INVALID = {
-    .arity = 0,
-    .handler = {
-        .arity0 = &invalid,
-    }
-};
-
-const instruction_t HALT = {
-    .arity = 0,
-    .handler = {
-        .arity0 = &halt,
-    }
-};
-
-const instruction_t POP = {
-    .arity = 0,
-    .handler = {
-        .arity0 = &pop,
-    }
-};
-
-const instruction_t SWAP = {
-    .arity = 0,
-    .handler = {
-        .arity0 = &swap,
-    }
-};
-
-const instruction_t DUP = {
-    .arity = 0,
-    .handler = {
-        .arity0 = &dup,
-    }
-};
-
-const instruction_t MULTIPLY = {
-    .arity = 0,
-    .handler = {
-        .arity0 = &multiply,
-    }
-};
-
-const instruction_t POWER = {
-    .arity = 0,
-    .handler = {
-        .arity0 = &power,
-    }
-};
-
-const instruction_t DIVIDE = {
-    .arity = 0,
-    .handler = {
-        .arity0 = &divide,
-    }
-};
-
-const instruction_t MODULO = {
-    .arity = 0,
-    .handler = {
-        .arity0 = &modulo,
-    }
-};
-
-const instruction_t ADD = {
-    .arity = 0,
-    .handler = {
-        .arity0 = &add,
-    }
-};
-
-const instruction_t SUBTRACT = {
-    .arity = 0,
-    .handler = {
-        .arity0 = &subtract,
-    }
-};
-
-const instruction_t LSHIFT = {
-    .arity = 0,
-    .handler = {
-        .arity0 = &lshift,
-    }
-};
-
-const instruction_t RSHIFT = {
-    .arity = 0,
-    .handler = {
-        .arity0 = &rshift,
-    }
-};
-
-const instruction_t AND_ = {
-    .arity = 0,
-    .handler = {
-        .arity0 = &and_,
-    }
-};
-
-const instruction_t OR_ = {
-    .arity = 0,
-    .handler = {
-        .arity0 = &or_,
-    }
-};
-
-const instruction_t XOR_ = {
-    .arity = 0,
-    .handler = {
-        .arity0 = &xor_,
-    }
-};
-
-const instruction_t LOAD_CONST_STRING = {
-    .arity = 1,
-    .handler = {
-        .arity1 = &load_const_string,
-    }
-};
-
-const instruction_t LOAD_CONST_INT = {
-    .arity = 1,
-    .handler = {
-        .arity1 = &load_const_int,
-    }
-};
-
-const instruction_t LOAD_CONST_ARTIFACT = {
-    .arity = 1,
-    .handler = {
-        .arity1 = &load_const_artifact,
-    }
-};
-
-const instruction_t CALL_INTRINSIC = {
-    .arity = 1,
-    .handler = {
-        .arity1 = &call_intrinsic,
-    }
-};
+extern const instruction_t* opcodes[256];
 
 #ifdef __cplusplus
 }
