@@ -6,12 +6,8 @@
 
 int load_const_string(vm_t* vm, uint32_t a)
 {
-    if (vm->sp + 1 >= MAX_STACK_SIZE)
+    if (a > vm->bytecode->string_count)
     {
-        return VCVM_ERROR_VM_STACKOVERFLOW;
-    }
-
-    if (a > vm->bytecode->string_count) {
         return VCVM_ERROR_BAD_CONSTANT_COUNT;
     }
 
@@ -24,10 +20,11 @@ int load_const_string(vm_t* vm, uint32_t a)
     char* str = vm->bytecode->strings[a];
 
     stack_value_init(value, vm->allocator_options);
-    stack_value_set_string(value, str);
+    int result = stack_value_set_string(value, str);
+    if (result != VCVM_STATUS_SUCCESS)
+    {
+        return result;
+    }
 
-    vm->sp++;
-    vm->stack[vm->sp] = value;
-
-    return VCVM_STATUS_SUCCESS;
+    return vm_push(vm, value);
 }

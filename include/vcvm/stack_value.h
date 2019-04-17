@@ -28,9 +28,10 @@ typedef struct stack_value
 } stack_value_t;
 
 int stack_value_init(stack_value_t* value, allocator_options_t* allocator_options);
-void stack_value_set_string(stack_value_t* value, char* str);
-void stack_value_set_int(stack_value_t* value, int32_t integer);
-void stack_value_set_uuid(stack_value_t* value, uint8_t* uuid);
+int stack_value_set_string(stack_value_t* value, char* str);
+int stack_value_set_int(stack_value_t* value, int32_t integer);
+int stack_value_set_uuid(stack_value_t* value, uint8_t* uuid);
+int stack_value_copy(stack_value_t* dest, stack_value_t* src);
 
 #ifdef __cplusplus
 }

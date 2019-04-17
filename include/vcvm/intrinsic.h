@@ -12,7 +12,7 @@ extern "C" {
 
 typedef struct vm vm_t;
 
-typedef int (*intrinsic_method_t)(vm_t* vm, uint32_t argc, uint32_t* argv);
+typedef int (*intrinsic_method_t)(vm_t* vm);
 
 typedef struct intrinsic
 {

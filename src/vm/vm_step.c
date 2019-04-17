@@ -1,6 +1,5 @@
 #include <vcvm/vm.h>
 #include <vcvm/instruction.h>
-#include <vcvm/instruction.h>
 #include <vcvm/error_codes.h>
 
 int vm_step(vm_t* vm)

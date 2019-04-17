@@ -5,6 +5,13 @@
 
 int pop(vm_t* vm)
 {
-    vm->sp--;
-    return VCVM_STATUS_SUCCESS;
+    stack_value_t* value;
+    int result = vm_pop(vm, &value);
+    if (result != VCVM_STATUS_SUCCESS)
+    {
+        goto skip_dispose;
+    }
+    dispose((disposable_t*)value);
+skip_dispose:
+    return result;
 }

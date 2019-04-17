@@ -6,12 +6,8 @@
 
 int load_const_artifact(vm_t* vm, uint32_t a)
 {
-    if (vm->sp + 1 >= MAX_STACK_SIZE)
+    if (a > vm->bytecode->artifact_count)
     {
-        return VCVM_ERROR_VM_STACKOVERFLOW;
-    }
-
-    if (a > vm->bytecode->artifact_count) {
         return VCVM_ERROR_BAD_CONSTANT_COUNT;
     }
 
@@ -24,10 +20,11 @@ int load_const_artifact(vm_t* vm, uint32_t a)
     uint8_t* uuid = vm->bytecode->artifacts[a];
 
     stack_value_init(value, vm->allocator_options);
-    stack_value_set_uuid(value, uuid);
+    int result = stack_value_set_uuid(value, uuid);
+    if (result != VCVM_STATUS_SUCCESS)
+    {
+        return result;
+    }
 
-    vm->sp++;
-    vm->stack[vm->sp] = value;
-
-    return VCVM_STATUS_SUCCESS;
+    return vm_push(vm, value);
 }

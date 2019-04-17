@@ -25,7 +25,7 @@ typedef struct bytecode
     char** strings;
 
     uint32_t artifact_count;
-    uint8_t ** artifacts;
+    uint8_t** artifacts;
 
     uint32_t intrinsics_count;
     intrinsic_t** intrinsics;

@@ -6,12 +6,8 @@
 
 int load_const_int(vm_t* vm, uint32_t a)
 {
-    if (vm->sp + 1 >= MAX_STACK_SIZE)
+    if (a > vm->bytecode->integer_count)
     {
-        return VCVM_ERROR_VM_STACKOVERFLOW;
-    }
-
-    if (a > vm->bytecode->integer_count) {
         return VCVM_ERROR_BAD_CONSTANT_COUNT;
     }
 
@@ -26,8 +22,5 @@ int load_const_int(vm_t* vm, uint32_t a)
     stack_value_init(value, vm->allocator_options);
     stack_value_set_int(value, number);
 
-    vm->sp++;
-    vm->stack[vm->sp] = value;
-
-    return VCVM_STATUS_SUCCESS;
+    return vm_push(vm, value);
 }

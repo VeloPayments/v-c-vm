@@ -6,8 +6,21 @@
 
 int divide(vm_t* vm)
 {
-    stack_value_t* left = vm->stack[vm->sp - 1];
-    stack_value_t* right = vm->stack[vm->sp];
+    int result;
+    stack_value_t* left;
+    stack_value_t* right;
+
+    result = vm_pop(vm, &right);
+    if (result != VCVM_STATUS_SUCCESS)
+    {
+        return result;
+    }
+
+    result = vm_pop(vm, &left);
+    if (result != VCVM_STATUS_SUCCESS)
+    {
+        return result;
+    }
 
     if (left->type != STACK_VALUE_TYPE_INTEGER || right->type != STACK_VALUE_TYPE_INTEGER)
     {
@@ -26,8 +39,5 @@ int divide(vm_t* vm)
     dispose((disposable_t*)left);
     dispose((disposable_t*)right);
 
-    vm->sp--;
-    vm->stack[vm->sp] = value;
-
-    return VCVM_STATUS_SUCCESS;
+    return vm_push(vm, value);
 }

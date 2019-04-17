@@ -1,7 +1,7 @@
 #include <vcvm/stack_value.h>
 #include <vcvm/error_codes.h>
 
-static void stack_dispose(void* context);
+static void stack_dispose(void* ctx);
 
 int stack_value_init(stack_value_t* value, allocator_options_t* allocator_options)
 {

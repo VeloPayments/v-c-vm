@@ -6,11 +6,27 @@
 
 int swap(vm_t* vm)
 {
-    stack_value_t* top = vm->stack[vm->sp];
-    stack_value_t* next = vm->stack[vm->sp - 1];
+    int result;
+    stack_value_t* left;
+    stack_value_t* right;
 
-    vm->stack[vm->sp - 1] = top;
-    vm->stack[vm->sp] = next;
+    result = vm_pop(vm, &right);
+    if (result != VCVM_STATUS_SUCCESS)
+    {
+        return result;
+    }
 
-    return VCVM_STATUS_SUCCESS;
+    result = vm_pop(vm, &left);
+    if (result != VCVM_STATUS_SUCCESS)
+    {
+        return result;
+    }
+
+    result = vm_push(vm, left);
+    if (result != VCVM_STATUS_SUCCESS)
+    {
+        return result;
+    }
+
+    return vm_push(vm, right);
 }

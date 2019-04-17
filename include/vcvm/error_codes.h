@@ -22,6 +22,7 @@ extern "C" {
 #define VCVM_ERROR_BAD_CONSTANT_COUNT 0x3007
 
 #define VCVM_ERROR_CANT_ALLOCATE 0xF000
+#define VCVM_ERROR_STACK_VALUE_CANT_COPY 0xF001
 
 #ifdef __cplusplus
 }

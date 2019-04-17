@@ -53,150 +53,150 @@ int load_const_artifact(vm_t* vm, uint32_t a);
 
 int call_intrinsic(vm_t* vm, uint32_t a);
 
-static const instruction_t NOP = {
+const instruction_t NOP = {
     .arity = 0,
     .handler = {
-        .arity0 = &nop
+        .arity0 = &nop,
     }
 };
 
-static const instruction_t INVALID = {
+const instruction_t INVALID = {
     .arity = 0,
     .handler = {
-        .arity0 = &invalid
+        .arity0 = &invalid,
     }
 };
 
-static const instruction_t HALT = {
+const instruction_t HALT = {
     .arity = 0,
     .handler = {
-        .arity0 = &halt
+        .arity0 = &halt,
     }
 };
 
-static const instruction_t POP = {
+const instruction_t POP = {
     .arity = 0,
     .handler = {
-        .arity0 = &pop
+        .arity0 = &pop,
     }
 };
 
-static const instruction_t SWAP = {
+const instruction_t SWAP = {
     .arity = 0,
     .handler = {
-        .arity0 = &swap
+        .arity0 = &swap,
     }
 };
 
-static const instruction_t DUP = {
+const instruction_t DUP = {
     .arity = 0,
     .handler = {
-        .arity0 = &dup
+        .arity0 = &dup,
     }
 };
 
-static const instruction_t MULTIPLY = {
+const instruction_t MULTIPLY = {
     .arity = 0,
     .handler = {
-        .arity0 = &multiply
+        .arity0 = &multiply,
     }
 };
 
-static const instruction_t POWER = {
+const instruction_t POWER = {
     .arity = 0,
     .handler = {
-        .arity0 = &power
+        .arity0 = &power,
     }
 };
 
-static const instruction_t DIVIDE = {
+const instruction_t DIVIDE = {
     .arity = 0,
     .handler = {
-        .arity0 = &divide
+        .arity0 = &divide,
     }
 };
 
-static const instruction_t MODULO = {
+const instruction_t MODULO = {
     .arity = 0,
     .handler = {
-        .arity0 = &modulo
+        .arity0 = &modulo,
     }
 };
 
-static const instruction_t ADD = {
+const instruction_t ADD = {
     .arity = 0,
     .handler = {
-        .arity0 = &add
+        .arity0 = &add,
     }
 };
 
-static const instruction_t SUBTRACT = {
+const instruction_t SUBTRACT = {
     .arity = 0,
     .handler = {
-        .arity0 = &subtract
+        .arity0 = &subtract,
     }
 };
 
-static const instruction_t LSHIFT = {
+const instruction_t LSHIFT = {
     .arity = 0,
     .handler = {
-        .arity0 = &lshift
+        .arity0 = &lshift,
     }
 };
 
-static const instruction_t RSHIFT = {
+const instruction_t RSHIFT = {
     .arity = 0,
     .handler = {
-        .arity0 = &rshift
+        .arity0 = &rshift,
     }
 };
 
-static const instruction_t AND_ = {
+const instruction_t AND_ = {
     .arity = 0,
     .handler = {
-        .arity0 = &and_
+        .arity0 = &and_,
     }
 };
 
-static const instruction_t OR_ = {
+const instruction_t OR_ = {
     .arity = 0,
     .handler = {
-        .arity0 = &or_
+        .arity0 = &or_,
     }
 };
 
-static const instruction_t XOR_ = {
+const instruction_t XOR_ = {
     .arity = 0,
     .handler = {
-        .arity0 = &xor_
+        .arity0 = &xor_,
     }
 };
 
-static const instruction_t LOAD_CONST_STRING = {
+const instruction_t LOAD_CONST_STRING = {
     .arity = 1,
     .handler = {
-        .arity1 = &load_const_string
+        .arity1 = &load_const_string,
     }
 };
 
-static const instruction_t LOAD_CONST_INT = {
+const instruction_t LOAD_CONST_INT = {
     .arity = 1,
     .handler = {
-        .arity1 = &load_const_int
+        .arity1 = &load_const_int,
     }
 };
 
-static const instruction_t LOAD_CONST_ARTIFACT = {
+const instruction_t LOAD_CONST_ARTIFACT = {
     .arity = 1,
     .handler = {
-        .arity1 = &load_const_artifact
+        .arity1 = &load_const_artifact,
     }
 };
 
-static const instruction_t CALL_INTRINSIC = {
+const instruction_t CALL_INTRINSIC = {
     .arity = 1,
     .handler = {
-        .arity1 = &call_intrinsic
+        .arity1 = &call_intrinsic,
     }
 };
 

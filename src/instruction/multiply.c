@@ -6,28 +6,43 @@
 
 int multiply(vm_t* vm)
 {
-    stack_value_t* left = vm->stack[vm->sp - 1];
-    stack_value_t* right = vm->stack[vm->sp];
+    int result;
+    stack_value_t* left;
+    stack_value_t* right;
+
+    result = vm_pop(vm, &right);
+    if (result != VCVM_STATUS_SUCCESS)
+    {
+        goto heck;
+    }
+
+    result = vm_pop(vm, &left);
+    if (result != VCVM_STATUS_SUCCESS)
+    {
+        goto done;
+    }
 
     if (left->type != STACK_VALUE_TYPE_INTEGER || right->type != STACK_VALUE_TYPE_INTEGER)
     {
-        return VCVM_ERROR_VM_BAD_TYPES;
+        result = VCVM_ERROR_VM_BAD_TYPES;
+        goto done;
     }
 
     stack_value_t* value = (stack_value_t*)allocate(vm->allocator_options, sizeof(stack_value_t));
     if (value == NULL)
     {
-        return VCVM_ERROR_CANT_ALLOCATE;
+        result = VCVM_ERROR_CANT_ALLOCATE;
+        goto done;
     }
 
     stack_value_init(value, vm->allocator_options);
     stack_value_set_int(value, left->integer * right->integer);
 
+    result = vm_push(vm, value);
+
+done:
     dispose((disposable_t*)left);
+heck:
     dispose((disposable_t*)right);
-
-    vm->sp--;
-    vm->stack[vm->sp] = value;
-
-    return VCVM_STATUS_SUCCESS;
+    return result;
 }

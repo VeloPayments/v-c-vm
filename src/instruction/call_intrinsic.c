@@ -18,12 +18,10 @@ int call_intrinsic(vm_t* vm, uint32_t a)
         return VCVM_ERROR_VM_STACKOVERFLOW;
     }
 
-    if ((vm->sp - intrinsic->nargs) <= 0)
+    if (vm->sp < intrinsic->nargs)
     {
         return VCVM_ERROR_VM_STACKUNDERFLOW;
     }
 
-    intrinsic->method(vm, 0, 0);
-
-    return VCVM_STATUS_SUCCESS;
+    return intrinsic->method(vm);
 }

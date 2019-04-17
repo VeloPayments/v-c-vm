@@ -138,7 +138,7 @@ static const instruction_t* opcodes[256] = {
     &INVALID,
     &INVALID,
     &INVALID,
-    &INVALID, // 2 arity args
+    &INVALID,  // 2 arity args
     &INVALID,
     &INVALID,
     &INVALID,
@@ -222,7 +222,7 @@ static const instruction_t* opcodes[256] = {
     &INVALID,
     &INVALID,
     &INVALID,
-    &INVALID, // 3 arity.
+    &INVALID,  // 3 arity.
     &INVALID,
     &INVALID,
     &INVALID,
