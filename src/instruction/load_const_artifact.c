@@ -28,3 +28,11 @@ int load_const_artifact(vm_t* vm, uint32_t a)
 
     return vm_push(vm, value);
 }
+
+const instruction_t LOAD_CONST_ARTIFACT = {
+    .name = "LOAD_CONST_ARTIFACT",
+    .arity = 1,
+    .handler = {
+        .arity1 = &load_const_artifact,
+    }
+};

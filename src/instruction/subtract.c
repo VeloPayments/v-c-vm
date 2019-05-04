@@ -46,3 +46,11 @@ heck:
     dispose((disposable_t*)right);
     return result;
 }
+
+const instruction_t SUBTRACT = {
+    .name = "SUBTRACT",
+    .arity = 0,
+    .handler = {
+        .arity0 = &subtract,
+    }
+};

@@ -8,3 +8,11 @@ int nop(vm_t* UNUSED(vm))
     return VCVM_STATUS_SUCCESS;
     // Nothing!
 }
+
+const instruction_t NOP = {
+    .name = "NOP",
+    .arity = 0,
+    .handler = {
+        .arity0 = &nop,
+    }
+};

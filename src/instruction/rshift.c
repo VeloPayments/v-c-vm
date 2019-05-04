@@ -50,3 +50,12 @@ heck:
     dispose((disposable_t*)right);
     return result;
 }
+
+
+const instruction_t RSHIFT = {
+    .name = "RSHIFT",
+    .arity = 0,
+    .handler = {
+        .arity0 = &rshift,
+    }
+};

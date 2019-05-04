@@ -47,3 +47,11 @@ heck:
     dispose((disposable_t*)right);
     return result;
 }
+
+const instruction_t POWER = {
+    .name = "POWER",
+    .arity = 0,
+    .handler = {
+        .arity0 = &power,
+    }
+};

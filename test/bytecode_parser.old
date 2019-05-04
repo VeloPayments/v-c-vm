@@ -5,7 +5,7 @@
 #include <string.h>
 #include <vpr/allocator/malloc_allocator.h>
 #include <vpr/parameters.h>
-#include "bytecode.h"
+#include "bytecode_parser.h"
 
 TEST_SUITE(bytecode);
 
@@ -32,8 +32,6 @@ static void fake_dispose(void* UNUSED(ctx))
 
 static uint8_t uuid1[16] = {UUID_1};
 static uint8_t uuid2[16] = {UUID_2};
-
-
 
 static intrinsic_t intrinsic_1 = {
     .hdr = disposable {.dispose = &fake_dispose},

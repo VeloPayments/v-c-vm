@@ -5,6 +5,8 @@
 #include <vcvm/intrinsic.h>
 #include <vpr/disposable.h>
 #include <vpr/allocator.h>
+#include <vpr/dynamic_array.h>
+#include <vpr/hashmap.h>
 
 /* make this header C++ friendly. */
 #ifdef __cplusplus
@@ -28,7 +30,7 @@ typedef struct bytecode
     uint8_t** artifacts;
 
     uint32_t intrinsics_count;
-    intrinsic_t** intrinsics;
+    const intrinsic_t** intrinsics;
 
     uint32_t instruction_count;
     uint32_t* instructions;

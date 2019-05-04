@@ -46,3 +46,12 @@ heck:
     dispose((disposable_t*)right);
     return result;
 }
+
+
+const instruction_t OR_ = {
+    .name = "OR_",
+    .arity = 0,
+    .handler = {
+        .arity0 = &or_,
+    }
+};

@@ -46,3 +46,11 @@ heck:
     dispose((disposable_t*)right);
     return result;
 }
+
+const instruction_t MODULO = {
+    .name = "MODULO",
+    .arity = 0,
+    .handler = {
+        .arity0 = &modulo,
+    }
+};

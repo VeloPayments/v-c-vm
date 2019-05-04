@@ -25,3 +25,12 @@ int call_intrinsic(vm_t* vm, uint32_t a)
 
     return intrinsic->method(vm);
 }
+
+
+const instruction_t CALL_INTRINSIC = {
+    .name = "CALL_INTRINSIC",
+    .arity = 1,
+    .handler = {
+        .arity1 = &call_intrinsic,
+    }
+};

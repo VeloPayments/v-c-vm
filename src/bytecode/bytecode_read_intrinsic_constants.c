@@ -14,8 +14,9 @@ int bytecode_read_intrinsic_constants(bytecode_t* bytecode, const uint8_t* raw, 
         goto done;
     }
 
-    bytecode->intrinsics = (intrinsic_t**)allocate(
+    bytecode->intrinsics = (const intrinsic_t**)allocate(
         bytecode->allocator_options,
+
         sizeof(intrinsic_t*) * bytecode->intrinsics_count);
 
     if (bytecode->intrinsics == NULL)
@@ -55,7 +56,7 @@ int bytecode_read_intrinsic_constants(bytecode_t* bytecode, const uint8_t* raw, 
             goto done;
         }
 
-        intrinsic_t* intrinsic = NULL;
+        const intrinsic_t* intrinsic = NULL;
         result = resolve(&intrinsic, uuid, nargs, nrets);
         if (result != VCVM_STATUS_SUCCESS)
         {

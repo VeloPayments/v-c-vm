@@ -30,3 +30,11 @@ int swap(vm_t* vm)
 
     return vm_push(vm, right);
 }
+
+const instruction_t SWAP = {
+    .name = "SWAP",
+    .arity = 0,
+    .handler = {
+        .arity0 = &swap,
+    }
+};

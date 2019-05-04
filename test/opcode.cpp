@@ -36,13 +36,13 @@ TEST(sanity)
 TEST(halt) {
     uint32_t i = 0xFF000000;
     uint8_t opcode = (i & (uint32_t) 0xFF000000) >> (uint8_t) 24;
-    const instruction_t* instr = opcodes[opcode];
+    const instruction_t* instr = instructions[opcode];
     TEST_EXPECT(instr == &HALT);
 }
 
 TEST(nop) {
     uint32_t i = 0x00000000;
     uint8_t opcode = (i & (uint32_t) 0xFF000000) >> (uint8_t) 24;
-    const instruction_t* instr = opcodes[opcode];
+    const instruction_t* instr = instructions[opcode];
     TEST_EXPECT(instr == &NOP);
 }

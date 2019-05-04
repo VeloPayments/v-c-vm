@@ -41,3 +41,11 @@ int divide(vm_t* vm)
 
     return vm_push(vm, value);
 }
+
+const instruction_t DIVIDE = {
+    .name = "DIVIDE",
+    .arity = 0,
+    .handler = {
+        .arity0 = &divide,
+    }
+};

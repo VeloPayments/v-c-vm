@@ -80,7 +80,7 @@ bind multiple methods of the same action to different UUIDs and let the user dec
 }
 ```
 
-In the bytecode there will be a pool of intrinsics that contain the following information
+In the bytecode there will be a pool of intrinsic that contain the following information
 
 ```c
 typedef struct intrinsic {
@@ -92,7 +92,7 @@ typedef struct intrinsic {
 ```
 In the future this will be extended to support type information on arguments allowing for stricter matching.
 
-When the virtual machine loads some bytecode it will scan the intrinsics pool and see if it can match the intrinsics requested
+When the virtual machine loads some bytecode it will scan the intrinsic pool and see if it can match the intrinsic requested
 to loaded methods. First it will check if there is an intrinsic loaded for a given STACK_VALUE_TYPE_UUID. It will then compare `nargs` and `nrets` 
 if they match then this is enough for us to load that into the vm for use during execution.
 

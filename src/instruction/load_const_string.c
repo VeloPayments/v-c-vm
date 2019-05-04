@@ -28,3 +28,11 @@ int load_const_string(vm_t* vm, uint32_t a)
 
     return vm_push(vm, value);
 }
+
+const instruction_t LOAD_CONST_STRING = {
+    .name = "LOAD_CONST_STRING",
+    .arity = 1,
+    .handler = {
+        .arity1 = &load_const_string,
+    }
+};

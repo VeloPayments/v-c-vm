@@ -39,3 +39,14 @@ int dup(vm_t* vm)
 done:
     return result;
 }
+
+
+
+
+const instruction_t DUP = {
+    .name = "DUP",
+    .arity = 0,
+    .handler = {
+        .arity0 = &dup,
+    }
+};

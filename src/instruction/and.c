@@ -41,3 +41,11 @@ int and_(vm_t* vm)
 
     return vm_push(vm, value);
 }
+
+const instruction_t AND_ = {
+    .name = "AND_",
+    .arity = 0,
+    .handler = {
+        .arity0 = &and_,
+    }
+};

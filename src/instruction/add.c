@@ -41,3 +41,12 @@ int add(vm_t* vm)
 
     return vm_push(vm, value);
 }
+
+
+const instruction_t ADD = {
+    .name = "ADD",
+    .arity = 0,
+    .handler = {
+        .arity0 = &add,
+    }
+};

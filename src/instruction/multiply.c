@@ -46,3 +46,13 @@ heck:
     dispose((disposable_t*)right);
     return result;
 }
+
+
+
+const instruction_t MULTIPLY = {
+    .name = "MULTIPLY",
+    .arity = 0,
+    .handler = {
+        .arity0 = &multiply,
+    }
+};

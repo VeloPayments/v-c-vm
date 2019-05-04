@@ -24,3 +24,11 @@ int load_const_int(vm_t* vm, uint32_t a)
 
     return vm_push(vm, value);
 }
+
+const instruction_t LOAD_CONST_INT = {
+    .name = "LOAD_CONST_INT",
+    .arity = 1,
+    .handler = {
+        .arity1 = &load_const_int,
+    }
+};

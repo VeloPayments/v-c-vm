@@ -15,3 +15,11 @@ int pop(vm_t* vm)
 skip_dispose:
     return result;
 }
+
+const instruction_t POP = {
+    .name = "POP",
+    .arity = 0,
+    .handler = {
+        .arity0 = &pop,
+    }
+};

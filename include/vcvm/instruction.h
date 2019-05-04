@@ -76,7 +76,7 @@ extern const instruction_t LOAD_CONST_INT;
 extern const instruction_t LOAD_CONST_ARTIFACT;
 extern const instruction_t CALL_INTRINSIC;
 
-extern const instruction_t* opcodes[256];
+extern const instruction_t* instructions[256];
 
 #ifdef __cplusplus
 }

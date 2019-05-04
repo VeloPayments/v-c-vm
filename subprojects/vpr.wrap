@@ -1,5 +1,5 @@
 [wrap-git]
 directory = vpr
-revision = head
+revision = master
 url = git@github.com:VeloPayments/vpr.git
 push-url = git@github.com:VeloPayments/vpr.git

@@ -46,3 +46,11 @@ heck:
     dispose((disposable_t*)right);
     return result;
 }
+
+const instruction_t LSHIFT = {
+    .name = "LSHIFT",
+    .arity = 0,
+    .handler = {
+        .arity0 = &lshift,
+    }
+};
