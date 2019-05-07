@@ -5,8 +5,6 @@
 #include <vcvm/intrinsic.h>
 #include <vpr/disposable.h>
 #include <vpr/allocator.h>
-#include <vpr/dynamic_array.h>
-#include <vpr/hashmap.h>
 
 /* make this header C++ friendly. */
 #ifdef __cplusplus
