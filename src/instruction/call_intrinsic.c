@@ -8,7 +8,7 @@ int call_intrinsic(vm_t* vm, uint32_t a)
 {
     if (a > vm->bytecode->intrinsics_count)
     {
-        return VCVM_ERROR_BAD_CONSTANT_COUNT;
+        return VCVM_ERROR_VM_BAD_CONSTANT_COUNT;
     }
 
     const intrinsic_t* intrinsic = vm->bytecode->intrinsics[a];

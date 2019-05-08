@@ -8,7 +8,7 @@ int load_const_artifact(vm_t* vm, uint32_t a)
 {
     if (a > vm->bytecode->artifact_count)
     {
-        return VCVM_ERROR_BAD_CONSTANT_COUNT;
+        return VCVM_ERROR_VM_BAD_CONSTANT_COUNT;
     }
 
     stack_value_t* value = (stack_value_t*)allocate(vm->allocator_options, sizeof(stack_value_t));

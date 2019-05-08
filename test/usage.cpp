@@ -26,7 +26,7 @@ TEST(simple_build)
 
     bytecode_builder_add_instruction(&builder,
         opcode_pack_one_arg(OPCODE_LOAD_CONST_STRING,
-            bytecode_builder_add_string(&builder, const_cast<char*>("test"))));
+            bytecode_builder_add_string(&builder, const_cast<char*>("testing"))));
 
     bytecode_builder_add_instruction(&builder,
         opcode_pack_one_arg(OPCODE_CALL_INTRINSIC,
