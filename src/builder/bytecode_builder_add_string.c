@@ -20,5 +20,5 @@ int bytecode_builder_add_string(bytecode_builder_t* builder, char* string)
 
     hashmap_put(&builder->strings, (uint8_t*)string, strlen(string), &new_constant);
 
-    return builder->string_count;
+    return new_constant.index;
 }

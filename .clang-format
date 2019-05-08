@@ -1,5 +1,5 @@
 BasedOnStyle: WebKit
-AlignAfterOpenBracket: Align
+AlignAfterOpenBracket: DontAlign
 AlignEscapedNewlines: DontAlign
 BraceWrapping:
   AfterControlStatement: true

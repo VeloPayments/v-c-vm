@@ -61,7 +61,7 @@ typedef struct uuid_constant {
 
 typedef struct intrinsic_constant {
     uint32_t index;
-    intrinsic_t* value;
+    const intrinsic_t* value;
 } intrinsic_constant_t;
 
 int bytecode_builder_init(bytecode_builder_t* builder, allocator_options_t* allocator);

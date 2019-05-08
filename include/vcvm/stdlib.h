@@ -9,6 +9,7 @@ extern "C" {
 #endif //__cplusplus
 
 extern const intrinsic_t STRING_CONTAINS;
+extern const intrinsic_t STRING_EQUALS;
 
 #ifdef __cplusplus
 }
