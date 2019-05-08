@@ -22,11 +22,11 @@ int bytecode_builder_init(bytecode_builder_t* builder, allocator_options_t* allo
 {
     builder->hdr.dispose = &bytecode_builder_dispose;
     builder->allocator_options = allocator;
+    builder->string_size = 0;
     builder->string_count = 0;
     builder->integer_count = 0;
     builder->artifact_count = 0;
     builder->intrinsic_count = 0;
-    builder->intruction_count = 0;
 
     int result = hashmap_options_init_ex(
         &builder->string_options,

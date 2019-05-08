@@ -1,5 +1,6 @@
 #include <vcvm/bytecode.h>
 #include <vcvm/error_codes.h>
+#include <vcvm/size.h>
 #include <string.h>
 #include "bytecode_internal.h"
 

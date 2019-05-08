@@ -18,6 +18,9 @@ int bytecode_builder_add_string(bytecode_builder_t* builder, char* string)
         .value = strdup(string)
     };
 
+    // This stops me having to iterate all the strings when working out the size of the total bytecode chunk.
+    builder->string_size += strlen(string);
+
     hashmap_put(&builder->strings, (uint8_t*)string, strlen(string), &new_constant);
 
     return new_constant.index;

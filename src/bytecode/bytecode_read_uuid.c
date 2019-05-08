@@ -2,6 +2,7 @@
 #include <stddef.h>
 #include <vcvm/error_codes.h>
 #include <vpr/parameters.h>
+#include <vcvm/size.h>
 #include "bytecode_internal.h"
 #include <string.h>
 

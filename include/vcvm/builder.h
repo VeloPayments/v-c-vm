@@ -23,6 +23,7 @@ typedef struct bytecode_builder
     allocator_options_t* allocator_options;
 
     uint32_t string_count;
+    uint32_t string_size;
     hashmap_options_t string_options;
     hashmap_t strings;
 
@@ -38,7 +39,6 @@ typedef struct bytecode_builder
     hashmap_options_t integers_options;
     hashmap_t integers;
 
-    uint32_t intruction_count;
     dynamic_array_options_t instructions_options;
     dynamic_array_t instructions;
 

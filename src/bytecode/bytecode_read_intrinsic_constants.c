@@ -1,4 +1,5 @@
 #include <vcvm/bytecode.h>
+#include <vcvm/size.h>
 #include <vcvm/error_codes.h>
 #include <stdint.h>
 #include <stddef.h>

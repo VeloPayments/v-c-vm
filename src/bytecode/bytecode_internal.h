@@ -10,9 +10,6 @@
 extern "C" {
 #endif  //__cplusplus
 
-#define UUID_SIZE 16
-#define INTRINSIC_SIZE (UUID_SIZE + sizeof(uint32_t) + sizeof(uint32_t))
-
 int bytecode_read_uint8(uint8_t* out, const uint8_t* raw, size_t size, size_t* offset);
 int bytecode_read_uint32(uint32_t* out, const uint8_t* raw, size_t size, size_t* offset);
 int bytecode_read_int32(int32_t* out, const uint8_t* raw, size_t size, size_t* offset);

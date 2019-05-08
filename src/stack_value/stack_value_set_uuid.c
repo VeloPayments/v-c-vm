@@ -1,10 +1,10 @@
 #include <vcvm/stack_value.h>
 #include <vcvm/error_codes.h>
+#include <vcvm/size.h>
 // See BLOC-208
 #define __USE_XOPEN_EXTENDED true
 #include <string.h>
 
-#define UUID_SIZE 16
 
 int stack_value_set_uuid(stack_value_t* value, uint8_t* uuid)
 {
