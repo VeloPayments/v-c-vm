@@ -27,6 +27,7 @@ int bytecode_builder_init(bytecode_builder_t* builder, allocator_options_t* allo
     builder->integer_count = 0;
     builder->artifact_count = 0;
     builder->intrinsic_count = 0;
+    builder->instruction_count = 0;
 
     int result = hashmap_options_init_ex(
         &builder->string_options,
@@ -76,9 +77,9 @@ int bytecode_builder_init(bytecode_builder_t* builder, allocator_options_t* allo
         builder->allocator_options,
         MAX_CONSTANTS,
         &compare_intrinsic_constant,
-        false,
+        true,
         sizeof(intrinsic_constant_t),
-        false);
+        true);
 
     if (result != VCVM_STATUS_SUCCESS)
     {

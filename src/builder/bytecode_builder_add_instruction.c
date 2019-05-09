@@ -6,6 +6,7 @@
 
 int bytecode_builder_add_instruction(bytecode_builder_t* builder, uint32_t instruction)
 {
+    builder->instruction_count++;
     int result = dynamic_array_append(&builder->instructions, &instruction);
     return result != VPR_STATUS_SUCCESS ? result : VCVM_STATUS_SUCCESS;
 }

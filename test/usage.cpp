@@ -1,18 +1,22 @@
 #include <minunit/minunit.h>
+#include <vpr/allocator/malloc_allocator.h>
+#include <vpr/parameters.h>
+#include <vcvm/error_codes.h>
+#include <vcvm/bytecode.h>
 #include <vcvm/builder.h>
 #include <vcvm/opcodes.h>
-#include <vpr/allocator/malloc_allocator.h>
-#include <vcvm/bytecode.h>
 #include <vcvm/stdlib.h>
-#include <iostream>
-#include <vpr/parameters.h>
 
 TEST_SUITE(usage);
 
-
-TEST(simple_build)
+int resolve(const intrinsic_t** intrinsic, uint8_t* UNUSED(uuid), uint32_t UNUSED(nargs), uint32_t UNUSED(nrets))
 {
-    TEST_SUCCESS()
+    *intrinsic = &STRING_CONTAINS;
+    return 0;
+}
+
+TEST(simple_usage)
+{
     allocator_options_t allocator;
     malloc_allocator_options_init(&allocator);
 
@@ -35,28 +39,19 @@ TEST(simple_build)
     size_t size = bytecode_builder_total_size(&builder);
 
     auto* bytes = static_cast<uint8_t*>(allocate(&allocator, size));
-    bytecode_builder_emit(&builder, bytes, size);
+    size_t written = 0;
+    bytecode_builder_emit(&builder, bytes, size, &written);
+
+    TEST_ASSERT(written == size);
+
+    bytecode_t parser;
+    int result = bytecode_init(&parser, &allocator, bytes, size, &resolve);
+
+    TEST_ASSERT(result == VCVM_STATUS_SUCCESS);
+
+    dispose((disposable_t*)&parser);
 
     release(&allocator, bytes);
     dispose((disposable_t*)&builder);
     dispose((disposable_t*)&allocator);
-}
-
-int resolve(const intrinsic_t** intrinsic, uint8_t* UNUSED(uuid), uint32_t UNUSED(nargs), uint32_t UNUSED(nrets))
-{
-    *intrinsic = &STRING_CONTAINS;
-    return 0;
-}
-
-TEST(simple_parse)
-{
-    TEST_SUCCESS()
-    allocator_options_t allocator;
-    malloc_allocator_options_init(&allocator);
-
-    size_t size = 123;
-    const uint8_t bytes[123] = { 0 };
-
-    bytecode_t parser;
-    bytecode_init(&parser, &allocator, bytes, size, &resolve);
 }

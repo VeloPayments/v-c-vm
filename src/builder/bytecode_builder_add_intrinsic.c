@@ -18,6 +18,5 @@ int bytecode_builder_add_intrinsic(bytecode_builder_t* builder, const intrinsic_
     };
 
     hashmap_put(&builder->intrinsics, intrinsic->uuid, UUID_SIZE, &new_constant);
-
     return new_constant.index;
 }

@@ -11,7 +11,7 @@ int intrinsic_string_contains(vm_t* UNUSED(vm))
 }
 
 const intrinsic_t STRING_CONTAINS = {
-    .uuid = (uint8_t*)&STRING_CONTAINS_UUID,
+    .uuid = (uint8_t*)STRING_CONTAINS_UUID,
     .nargs = 2,
     .nrets = 1,
     .method = &intrinsic_string_contains

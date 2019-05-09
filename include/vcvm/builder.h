@@ -39,9 +39,9 @@ typedef struct bytecode_builder
     hashmap_options_t integers_options;
     hashmap_t integers;
 
+    uint32_t instruction_count;
     dynamic_array_options_t instructions_options;
     dynamic_array_t instructions;
-
 } bytecode_builder_t;
 
 typedef struct string_constant {
@@ -73,7 +73,7 @@ int bytecode_builder_add_intrinsic(bytecode_builder_t* builder, const intrinsic_
 int bytecode_builder_add_instruction(bytecode_builder_t* builder, uint32_t instruction);
 
 size_t bytecode_builder_total_size(bytecode_builder_t* builder);
-int bytecode_builder_emit(bytecode_builder_t* builder, uint8_t* bytes, size_t size);
+int bytecode_builder_emit(bytecode_builder_t* builder, uint8_t* bytes, size_t size, size_t* written);
 
 
 

@@ -11,7 +11,7 @@ int intrinsic_string_equals(vm_t* UNUSED(vm))
 }
 
 const intrinsic_t STRING_EQUALS = {
-    .uuid = (uint8_t*)&STRING_EQUALS_UUID,
+    .uuid = (uint8_t*)STRING_EQUALS_UUID,
     .nargs = 2,
     .nrets = 1,
     .method = &intrinsic_string_equals
