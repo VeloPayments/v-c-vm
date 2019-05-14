@@ -28,7 +28,7 @@ typedef struct bytecode {
 } bytecode_t;
 ```
 For this version the magic number will be `0xDECAF`.
-The content of the structure is not garanteed to be backwards compatible yet.
+The content of the structure is not guaranteed to be backwards compatible yet.
 
 ## Instruction format
 
@@ -80,7 +80,7 @@ bind multiple methods of the same action to different UUIDs and let the user dec
 }
 ```
 
-In the bytecode there will be a pool of intrinsic that contain the following information
+In the bytecode there will be a pool of intrinsics that contain the following information
 
 ```c
 typedef struct intrinsic {

@@ -25,7 +25,7 @@ int bytecode_builder_init(bytecode_builder_t* builder, allocator_options_t* allo
     builder->string_size = 0;
     builder->string_count = 0;
     builder->integer_count = 0;
-    builder->artifact_count = 0;
+    builder->uuid_count = 0;
     builder->intrinsic_count = 0;
     builder->instruction_count = 0;
 
@@ -59,7 +59,7 @@ int bytecode_builder_init(bytecode_builder_t* builder, allocator_options_t* allo
     }
 
     result = hashmap_options_init(
-        &builder->artifacts_options,
+        &builder->uuid_options,
         builder->allocator_options,
         MAX_CONSTANTS,
         &compare_uuid_constant,
@@ -98,7 +98,7 @@ int bytecode_builder_init(bytecode_builder_t* builder, allocator_options_t* allo
         goto done;
     }
 
-    result = hashmap_init(&builder->artifacts_options, &builder->artifacts);
+    result = hashmap_init(&builder->uuid_options, &builder->uuids);
     if (result != VCVM_STATUS_SUCCESS)
     {
         goto done;
@@ -134,12 +134,12 @@ void bytecode_builder_dispose(void* ctx)
     // I didn't intend for this text to cascade.
     dispose((disposable_t*)&builder->strings);
     dispose((disposable_t*)&builder->integers);
-    dispose((disposable_t*)&builder->artifacts);
+    dispose((disposable_t*)&builder->uuids);
     dispose((disposable_t*)&builder->intrinsics);
     dispose((disposable_t*)&builder->instructions);
     dispose((disposable_t*)&builder->string_options);
     dispose((disposable_t*)&builder->integers_options);
-    dispose((disposable_t*)&builder->artifacts_options);
+    dispose((disposable_t*)&builder->uuid_options);
     dispose((disposable_t*)&builder->intrinsics_options);
     dispose((disposable_t*)&builder->instructions_options);
 }
@@ -183,5 +183,6 @@ bool compare_uuid_constant(const void* x, const void* y)
 
 bool compare_string_constant(const void* x, const void* y)
 {
-    return strcmp((char*)x, (char*)y);
+    string_constant_t* right = (string_constant_t*) y;
+    return strcmp(right->value, (char*)x) == 0;
 }

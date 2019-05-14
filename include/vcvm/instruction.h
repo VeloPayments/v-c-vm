@@ -50,9 +50,11 @@ int xor_(vm_t* vm);
 
 int load_const_string(vm_t* vm, uint32_t a);
 int load_const_int(vm_t* vm, uint32_t a);
-int load_const_artifact(vm_t* vm, uint32_t a);
+int load_const_uuid(vm_t *vm, uint32_t a);
 
 int call_intrinsic(vm_t* vm, uint32_t a);
+
+int push_context_cert(vm_t* vm);
 
 extern const instruction_t NOP;
 extern const instruction_t INVALID;
@@ -73,8 +75,9 @@ extern const instruction_t OR_;
 extern const instruction_t XOR_;
 extern const instruction_t LOAD_CONST_STRING;
 extern const instruction_t LOAD_CONST_INT;
-extern const instruction_t LOAD_CONST_ARTIFACT;
+extern const instruction_t LOAD_CONST_UUID;
 extern const instruction_t CALL_INTRINSIC;
+extern const instruction_t PUSH_CONTEXT_CERT;
 
 extern const instruction_t* instructions[256];
 

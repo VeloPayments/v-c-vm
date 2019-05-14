@@ -36,7 +36,7 @@ int rshift(vm_t* vm)
     }
 
     stack_value_init(value, vm->allocator_options);
-    result = stack_value_set_int(value, left->integer << right->integer);
+    result = stack_value_set_int(value, left->integer >> right->integer);
     if (result != VCVM_STATUS_SUCCESS)
     {
         goto done;

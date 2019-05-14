@@ -32,7 +32,7 @@ int bytecode_builder_emit(bytecode_builder_t* builder, uint8_t* byte, size_t siz
         goto done;
     }
 
-    result = bytecode_builder_write_artifact_constants(builder, byte, &offset);
+    result = bytecode_builder_write_uuid_constants(builder, byte, &offset);
     if (result != VCVM_STATUS_SUCCESS)
     {
         goto done;

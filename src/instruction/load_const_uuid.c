@@ -4,9 +4,9 @@
 #include <vcvm/stack_value.h>
 #include <vpr/parameters.h>
 
-int load_const_artifact(vm_t* vm, uint32_t a)
+int load_const_uuid(vm_t *vm, uint32_t a)
 {
-    if (a > vm->bytecode->artifact_count)
+    if (a > vm->bytecode->uuid_count)
     {
         return VCVM_ERROR_VM_BAD_CONSTANT_COUNT;
     }
@@ -17,7 +17,7 @@ int load_const_artifact(vm_t* vm, uint32_t a)
         return VCVM_ERROR_CANT_ALLOCATE;
     }
 
-    uint8_t* uuid = vm->bytecode->artifacts[a];
+    uint8_t* uuid = vm->bytecode->uuids[a];
 
     stack_value_init(value, vm->allocator_options);
     int result = stack_value_set_uuid(value, uuid);
@@ -29,10 +29,10 @@ int load_const_artifact(vm_t* vm, uint32_t a)
     return vm_push(vm, value);
 }
 
-const instruction_t LOAD_CONST_ARTIFACT = {
-    .name = "LOAD_CONST_ARTIFACT",
+const instruction_t LOAD_CONST_UUID = {
+    .name = "LOAD_CONST_UUID",
     .arity = 1,
     .handler = {
-        .arity1 = &load_const_artifact,
+        .arity1 = &load_const_uuid,
     }
 };

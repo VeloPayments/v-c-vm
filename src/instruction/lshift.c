@@ -36,7 +36,7 @@ int lshift(vm_t* vm)
     }
 
     stack_value_init(value, vm->allocator_options);
-    stack_value_set_int(value, left->integer >> right->integer);
+    stack_value_set_int(value, left->integer << right->integer);
 
     result = vm_push(vm, value);
 

@@ -11,7 +11,7 @@ int bytecode_builder_write_integer_constants(bytecode_builder_t* builder, uint8_
     memcpy(byte + *offset, &builder->integer_count, sizeof(uint32_t));
     *offset += sizeof(uint32_t);
 
-    if (builder->intrinsic_count == 0)
+    if (builder->integer_count == 0)
     {
         return VCVM_STATUS_SUCCESS;
     }

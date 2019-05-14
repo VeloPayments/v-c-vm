@@ -41,6 +41,12 @@ vpr = dependency(
   fallback : ['vpr', 'vpr_dep']
 )
 
+vccert = dependency(
+  'vccert',
+  required : true,
+  fallback : ['vccert', 'vccert_dep']
+)
+
 vcvm_include = include_directories('include')
 
 vcvm_lib = static_library('vcvm', src,

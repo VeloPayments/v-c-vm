@@ -81,9 +81,9 @@ TEST(builder_add_artifact)
     };
 
 
-    int first_index = bytecode_builder_add_artifact(&builder, (uint8_t*) uuid1);
-    int same_index = bytecode_builder_add_artifact(&builder, (uint8_t*) uuid1);
-    int different_index = bytecode_builder_add_artifact(&builder, (uint8_t*) uuid2);
+    int first_index = bytecode_builder_add_uuid(&builder, (uint8_t *) uuid1);
+    int same_index = bytecode_builder_add_uuid(&builder, (uint8_t *) uuid1);
+    int different_index = bytecode_builder_add_uuid(&builder, (uint8_t *) uuid2);
 
     TEST_EXPECT(first_index == same_index);
     TEST_EXPECT(first_index != different_index);

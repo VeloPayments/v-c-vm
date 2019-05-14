@@ -4,12 +4,12 @@
 #include <vcvm/size.h>
 #include <vcvm/error_codes.h>
 
-int bytecode_builder_write_artifact_constants(bytecode_builder_t* builder, uint8_t* byte, size_t* offset)
+int bytecode_builder_write_uuid_constants(bytecode_builder_t *builder, uint8_t *byte, size_t *offset)
 {
-    doubly_linked_list_t** buckets = (doubly_linked_list_t**)builder->artifacts.buckets;
-    size_t cap = builder->artifacts.options->capacity;
+    doubly_linked_list_t** buckets = (doubly_linked_list_t**)builder->uuids.buckets;
+    size_t cap = builder->uuids.options->capacity;
 
-    memcpy(byte + *offset, &builder->artifact_count, sizeof(uint32_t));
+    memcpy(byte + *offset, &builder->uuid_count, sizeof(uint32_t));
     *offset += sizeof(uint32_t);
 
     for (size_t i = 0; i < cap; i++)

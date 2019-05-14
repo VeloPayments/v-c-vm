@@ -21,11 +21,12 @@ typedef struct vm
     allocator_options_t* allocator_options;
     stack_value_t* stack[MAX_STACK_SIZE];
     bytecode_t* bytecode;
+    uint8_t* context_cert;
     uint32_t sp;
     uint32_t ip;
 } vm_t;
 
-int vm_init(vm_t* vm, allocator_options_t* allocator_options, bytecode_t* bytecode);
+int vm_init(vm_t* vm, allocator_options_t* allocator_options, bytecode_t* bytecode, uint8_t* context_cert);
 int vm_step(vm_t* vm);
 int vm_pop(vm_t* vm, stack_value_t** value);
 int vm_push(vm_t* vm, stack_value_t* value);

@@ -31,9 +31,9 @@ typedef struct bytecode_builder
     hashmap_options_t intrinsics_options;
     hashmap_t intrinsics;
 
-    uint32_t artifact_count;
-    hashmap_options_t artifacts_options;
-    hashmap_t artifacts;
+    uint32_t uuid_count;
+    hashmap_options_t uuid_options;
+    hashmap_t uuids;
 
     uint32_t integer_count;
     hashmap_options_t integers_options;
@@ -68,7 +68,7 @@ int bytecode_builder_init(bytecode_builder_t* builder, allocator_options_t* allo
 
 int bytecode_builder_add_string(bytecode_builder_t* builder, char* string);
 int bytecode_builder_add_int(bytecode_builder_t* builder, int32_t num);
-int bytecode_builder_add_artifact(bytecode_builder_t* builder, uint8_t* artifact_uuid);
+int bytecode_builder_add_uuid(bytecode_builder_t *builder, uint8_t *uuid);
 int bytecode_builder_add_intrinsic(bytecode_builder_t* builder, const intrinsic_t* intrinsic);
 int bytecode_builder_add_instruction(bytecode_builder_t* builder, uint32_t instruction);
 

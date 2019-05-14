@@ -7,28 +7,28 @@
 int swap(vm_t* vm)
 {
     int result;
-    stack_value_t* left;
-    stack_value_t* right;
+    stack_value_t* top;
+    stack_value_t* second;
 
-    result = vm_pop(vm, &right);
+    result = vm_pop(vm, &top);
     if (result != VCVM_STATUS_SUCCESS)
     {
         return result;
     }
 
-    result = vm_pop(vm, &left);
+    result = vm_pop(vm, &second);
     if (result != VCVM_STATUS_SUCCESS)
     {
         return result;
     }
 
-    result = vm_push(vm, left);
+    result = vm_push(vm, top);
     if (result != VCVM_STATUS_SUCCESS)
     {
         return result;
     }
 
-    return vm_push(vm, right);
+    return vm_push(vm, second);
 }
 
 const instruction_t SWAP = {
