@@ -10,6 +10,8 @@ extern "C" {
 
 extern const intrinsic_t STRING_CONTAINS;
 extern const intrinsic_t STRING_EQUALS;
+extern const intrinsic_t LOAD_ARTIFACT;
+extern const intrinsic_t LONGCODE_TO_SHORTCODE;
 
 #ifdef __cplusplus
 }
