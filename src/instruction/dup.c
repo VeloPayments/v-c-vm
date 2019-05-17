@@ -37,10 +37,11 @@ int dup(vm_t* vm)
     result = vm_push(vm, value);
 
 done:
+    dispose((disposable_t*)value);
+    release(value->allocator_options, value);
+
     return result;
 }
-
-
 
 
 const instruction_t DUP = {

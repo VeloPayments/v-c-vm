@@ -78,6 +78,11 @@ extern const instruction_t LOAD_CONST_INT;
 extern const instruction_t LOAD_CONST_UUID;
 extern const instruction_t CALL_INTRINSIC;
 extern const instruction_t PUSH_CONTEXT_CERT;
+extern const instruction_t ASSERT;
+extern const instruction_t CMP;
+extern const instruction_t CHECK_EQ;
+extern const instruction_t CHECK_LT;
+extern const instruction_t CHECK_GT;
 
 extern const instruction_t* instructions[256];
 

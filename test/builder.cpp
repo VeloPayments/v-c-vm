@@ -81,9 +81,9 @@ TEST(builder_add_artifact)
     };
 
 
-    int first_index = bytecode_builder_add_uuid(&builder, (uint8_t *) uuid1);
-    int same_index = bytecode_builder_add_uuid(&builder, (uint8_t *) uuid1);
-    int different_index = bytecode_builder_add_uuid(&builder, (uint8_t *) uuid2);
+    int first_index = bytecode_builder_add_uuid(&builder, (uint8_t*)uuid1);
+    int same_index = bytecode_builder_add_uuid(&builder, (uint8_t*)uuid1);
+    int different_index = bytecode_builder_add_uuid(&builder, (uint8_t*)uuid2);
 
     TEST_EXPECT(first_index == same_index);
     TEST_EXPECT(first_index != different_index);
@@ -103,10 +103,10 @@ TEST(builder_add_instructions)
     bytecode_builder_add_instruction(&builder, 0xCAFEBABE);
     bytecode_builder_add_instruction(&builder, 0xDECAFBAB);
 
-    auto elements = (uint32_t*) builder.instructions.array;
+    auto elements = (uint32_t*)builder.instructions.array;
 
     TEST_EXPECT(*(elements) == 0xCAFEBABE);
-    TEST_EXPECT(*(elements+1) == 0xDECAFBAB);
+    TEST_EXPECT(*(elements + 1) == 0xDECAFBAB);
 
     dispose((disposable_t*)&builder);
     dispose((disposable_t*)&allocator);

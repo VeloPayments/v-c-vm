@@ -11,16 +11,16 @@ TEST(sanity)
     uint32_t i = 0x0A0B0C0D;
 
     // Opcode mask (top 8 bits)
-    uint8_t o1 = (i & (uint32_t) 0xFF000000) >> (uint8_t) 24;
+    uint8_t o1 = (i & (uint32_t)0xFF000000) >> (uint8_t)24;
     TEST_EXPECT(o1 == 0xA);
 
     // 1 arg: 24 bit.
-    uint32_t o2 = (i & (uint32_t) 0x00FFFFFF);
+    uint32_t o2 = (i & (uint32_t)0x00FFFFFF);
     TEST_EXPECT(o2 == 0xB0C0D);
 
     // 2 arg: 12 bits each
-    uint16_t o3 = (i & (uint32_t) 0x00fff000) >> (uint8_t) 12;
-    uint16_t o4 = (i & (uint32_t) 0x00000fff);
+    uint16_t o3 = (i & (uint32_t)0x00fff000) >> (uint8_t)12;
+    uint16_t o4 = (i & (uint32_t)0x00000fff);
     TEST_EXPECT(o3 == 0xB0);
     TEST_EXPECT(o4 == 0xC0D);
 
@@ -33,16 +33,18 @@ TEST(sanity)
     TEST_EXPECT(bytes[3] == 0xD);
 }
 
-TEST(halt) {
+TEST(halt)
+{
     uint32_t i = 0xFF000000;
-    uint8_t opcode = (i & (uint32_t) 0xFF000000) >> (uint8_t) 24;
+    uint8_t opcode = (i & (uint32_t)0xFF000000) >> (uint8_t)24;
     const instruction_t* instr = instructions[opcode];
     TEST_EXPECT(instr == &HALT);
 }
 
-TEST(nop) {
+TEST(nop)
+{
     uint32_t i = 0x00000000;
-    uint8_t opcode = (i & (uint32_t) 0xFF000000) >> (uint8_t) 24;
+    uint8_t opcode = (i & (uint32_t)0xFF000000) >> (uint8_t)24;
     const instruction_t* instr = instructions[opcode];
     TEST_EXPECT(instr == &NOP);
 }

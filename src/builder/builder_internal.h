@@ -8,7 +8,7 @@ extern "C" {
 
 int bytecode_builder_write_integer_constants(bytecode_builder_t* builder, uint8_t* byte, size_t* offset);
 int bytecode_builder_write_string_constants(bytecode_builder_t* builder, uint8_t* byte, size_t* offset);
-int bytecode_builder_write_uuid_constants(bytecode_builder_t *builder, uint8_t *byte, size_t *offset);
+int bytecode_builder_write_uuid_constants(bytecode_builder_t* builder, uint8_t* byte, size_t* offset);
 int bytecode_builder_write_intrinsic_constants(bytecode_builder_t* builder, uint8_t* byte, size_t* offset);
 int bytecode_builder_write_instructions(bytecode_builder_t* builder, uint8_t* byte, size_t* offset);
 

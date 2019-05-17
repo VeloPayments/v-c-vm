@@ -9,11 +9,11 @@ int pop(vm_t* vm)
     int result = vm_pop(vm, &value);
     if (result != VCVM_STATUS_SUCCESS)
     {
-        goto skip_dispose;
+        return result;
     }
     dispose((disposable_t*)value);
-skip_dispose:
-    return result;
+    release(value->allocator_options, value);
+    return VCVM_STATUS_SUCCESS;
 }
 
 const instruction_t POP = {

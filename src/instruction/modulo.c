@@ -13,26 +13,26 @@ int modulo(vm_t* vm)
     result = vm_pop(vm, &right);
     if (result != VCVM_STATUS_SUCCESS)
     {
-        goto heck;
+        return result;
     }
 
     result = vm_pop(vm, &left);
     if (result != VCVM_STATUS_SUCCESS)
     {
-        goto done;
+        goto cleanup_right;
     }
 
     if (left->type != STACK_VALUE_TYPE_INTEGER || right->type != STACK_VALUE_TYPE_INTEGER)
     {
         result = VCVM_ERROR_VM_BAD_TYPES;
-        goto done;
+        goto cleanup_both;
     }
 
     stack_value_t* value = (stack_value_t*)allocate(vm->allocator_options, sizeof(stack_value_t));
     if (value == NULL)
     {
         result = VCVM_ERROR_CANT_ALLOCATE;
-        goto done;
+        goto cleanup_both;
     }
 
     stack_value_init(value, vm->allocator_options);
@@ -40,10 +40,14 @@ int modulo(vm_t* vm)
 
     result = vm_push(vm, value);
 
-done:
+cleanup_both:
     dispose((disposable_t*)left);
-heck:
+    release(left->allocator_options, left);
+
+cleanup_right:
     dispose((disposable_t*)right);
+    release(right->allocator_options, right);
+
     return result;
 }
 

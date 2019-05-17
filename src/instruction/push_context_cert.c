@@ -5,7 +5,6 @@
 
 int push_context_cert(vm_t* UNUSED(vm))
 {
-
     return VCVM_STATUS_SUCCESS;
 }
 

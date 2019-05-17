@@ -169,20 +169,20 @@ bool compare_int_constant(const void* x, const void* y)
 
 bool compare_intrinsic_constant(const void* x, const void* y)
 {
-    intrinsic_constant_t* right = (intrinsic_constant_t*) y;
-    uint8_t* left = (uint8_t*) x;
+    intrinsic_constant_t* right = (intrinsic_constant_t*)y;
+    uint8_t* left = (uint8_t*)x;
     return memcmp(right->value->uuid, left, UUID_SIZE) == 0;
 }
 
 bool compare_uuid_constant(const void* x, const void* y)
 {
-    uuid_constant_t* right = (uuid_constant_t*) y;
-    uint8_t* left = (uint8_t*) x;
+    uuid_constant_t* right = (uuid_constant_t*)y;
+    uint8_t* left = (uint8_t*)x;
     return memcmp(right->value, left, UUID_SIZE) == 0;
 }
 
 bool compare_string_constant(const void* x, const void* y)
 {
-    string_constant_t* right = (string_constant_t*) y;
+    string_constant_t* right = (string_constant_t*)y;
     return strcmp(right->value, (char*)x) == 0;
 }

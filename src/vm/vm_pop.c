@@ -8,6 +8,8 @@ int vm_pop(vm_t* vm, stack_value_t** value)
         return VCVM_ERROR_VM_STACKUNDERFLOW;
     }
 
-    *value = vm->stack[vm->sp--];
+    vm->sp--;
+    *value = vm->stack[vm->sp];
+    vm->stack[vm->sp] = NULL;
     return VCVM_STATUS_SUCCESS;
 }

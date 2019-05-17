@@ -17,6 +17,8 @@ int vm_init(vm_t* vm, allocator_options_t* allocator_options, bytecode_t* byteco
 void vm_dispose(void* ctx)
 {
     vm_t* vm = (vm_t*)ctx;
-    dispose((disposable_t*)vm->bytecode);
-    release(vm->allocator_options, vm);
+    if (vm->bytecode != NULL)
+    {
+        dispose((disposable_t*)vm->bytecode);
+    }
 }

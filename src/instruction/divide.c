@@ -19,27 +19,36 @@ int divide(vm_t* vm)
     result = vm_pop(vm, &left);
     if (result != VCVM_STATUS_SUCCESS)
     {
-        return result;
+        goto cleanup_right;
     }
 
     if (left->type != STACK_VALUE_TYPE_INTEGER || right->type != STACK_VALUE_TYPE_INTEGER)
     {
-        return VCVM_ERROR_VM_BAD_TYPES;
+        result = VCVM_ERROR_VM_BAD_TYPES;
+        goto cleanup_both;
     }
 
     stack_value_t* value = (stack_value_t*)allocate(vm->allocator_options, sizeof(stack_value_t));
     if (value == NULL)
     {
-        return VCVM_ERROR_CANT_ALLOCATE;
+        result = VCVM_ERROR_CANT_ALLOCATE;
+        goto cleanup_both;
     }
 
     stack_value_init(value, vm->allocator_options);
     stack_value_set_int(value, left->integer / right->integer);
 
-    dispose((disposable_t*)left);
-    dispose((disposable_t*)right);
+    result = vm_push(vm, value);
 
-    return vm_push(vm, value);
+cleanup_both:
+    dispose((disposable_t*)left);
+    release(left->allocator_options, left);
+
+cleanup_right:
+    dispose((disposable_t*)right);
+    release(right->allocator_options, right);
+
+    return result;
 }
 
 const instruction_t DIVIDE = {
