@@ -47,9 +47,11 @@ int rshift(vm_t* vm);
 int and_(vm_t* vm);
 int or_(vm_t* vm);
 int xor_(vm_t* vm);
+int assert(vm_t* vm);
 
 int load_const_string(vm_t* vm, uint32_t a);
 int load_const_int(vm_t* vm, uint32_t a);
+
 int load_const_uuid(vm_t *vm, uint32_t a);
 
 int call_intrinsic(vm_t* vm, uint32_t a);

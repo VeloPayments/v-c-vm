@@ -19,7 +19,7 @@ pipeline {
                     export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig/
 
                     env CC=/opt/vctoolchain/host/bin/gcc CXX=/opt/vctoolchain/host/bin/g++ meson --buildtype=debug build/host/debug
-                    ninja-build -C build/host/debug test
+                    ninja -C build/host/debug test
                     '''
                 }
             }
@@ -35,7 +35,7 @@ pipeline {
                     export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig/
 
                     env CC=/opt/vctoolchain/host/bin/gcc CXX=/opt/vctoolchain/host/bin/g++ meson build/host/release
-                    ninja-build -C build/host/release test
+                    ninja -C build/host/release test
                     '''    // Shell build step
                 }
             }
