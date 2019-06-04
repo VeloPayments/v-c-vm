@@ -47,11 +47,17 @@ vccert = dependency(
   fallback : ['vccert', 'vccert_dep']
 )
 
+vccrypt = dependency(
+  'vccrypt',
+  required : true,
+  fallback : ['vccrypt', 'vccrypt_dep']
+)
+
 vcvm_include = include_directories('include')
 
 vcvm_lib = static_library('vcvm', src,
   include_directories : vcvm_include,
-  dependencies : [vpr]
+  dependencies : [vpr, vccert, vccrypt]
 )
 
 vcvm_dep = declare_dependency(
@@ -64,7 +70,7 @@ vcvm_test = executable(
   test_src,
   include_directories : vcvm_include,
   link_with : vcvm_lib,
-  dependencies : [minunit, vpr]
+  dependencies : [minunit, vpr, vccert, vccrypt]
 )
 
 test('testvcvm', vcvm_test)

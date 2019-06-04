@@ -4,10 +4,11 @@
 
 static void vm_dispose(void* ctx);
 
-int vm_init(vm_t* vm, allocator_options_t* allocator_options, bytecode_t* bytecode, uint8_t* context_cert)
+int vm_init(vm_t* vm, allocator_options_t* allocator_options, vccert_parser_options_t* parser_options, uint8_t* context_cert, bytecode_t* bytecode)
 {
     vm->hdr.dispose = &vm_dispose;
     vm->allocator_options = allocator_options;
+    vm->parser_options = parser_options;
     vm->sp = 0;
     vm->context_cert = context_cert;
     vm->bytecode = bytecode;

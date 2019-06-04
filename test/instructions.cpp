@@ -9,21 +9,21 @@ TEST_SUITE(builder);
 
 TEST(instruction_subtract)
 {
-    allocator_options_t options;
-    malloc_allocator_options_init(&options);
+    allocator_options_t allocator_options;
+    malloc_allocator_options_init(&allocator_options);
 
     vm_t vm;
-    vm_init(&vm, &options, NULL, NULL);
+    vm_init(&vm, &allocator_options, nullptr, nullptr, nullptr);
 
-    auto first = (stack_value_t*)allocate(&options, sizeof(stack_value_t));
+    auto first = (stack_value_t*)allocate(&allocator_options, sizeof(stack_value_t));
     TEST_ASSERT(first != nullptr);
-    auto second = (stack_value_t*)allocate(&options, sizeof(stack_value_t));
+    auto second = (stack_value_t*)allocate(&allocator_options, sizeof(stack_value_t));
     TEST_ASSERT(second != nullptr);
 
-    int result = stack_value_init(first, &options);
+    int result = stack_value_init(first, &allocator_options);
     TEST_ASSERT(result == VCVM_STATUS_SUCCESS);
 
-    result = stack_value_init(second, &options);
+    result = stack_value_init(second, &allocator_options);
     TEST_ASSERT(result == VCVM_STATUS_SUCCESS);
 
     stack_value_set_int(first, 6);
@@ -45,29 +45,29 @@ TEST(instruction_subtract)
     TEST_EXPECT(value->integer == 1);
 
     dispose((disposable_t*)value);
-    release(&options, value);
+    release(&allocator_options, value);
 
     dispose((disposable_t*)&vm);
-    dispose((disposable_t*)&options);
+    dispose((disposable_t*)&allocator_options);
 }
 
 TEST(instruction_add)
 {
-    allocator_options_t options;
-    malloc_allocator_options_init(&options);
+    allocator_options_t allocator_options;
+    malloc_allocator_options_init(&allocator_options);
 
     vm_t vm;
-    vm_init(&vm, &options, NULL, NULL);
+    vm_init(&vm, &allocator_options, nullptr, nullptr, nullptr);
 
-    auto first = (stack_value_t*)allocate(&options, sizeof(stack_value_t));
+    auto first = (stack_value_t*)allocate(&allocator_options, sizeof(stack_value_t));
     TEST_ASSERT(first != nullptr);
-    auto second = (stack_value_t*)allocate(&options, sizeof(stack_value_t));
+    auto second = (stack_value_t*)allocate(&allocator_options, sizeof(stack_value_t));
     TEST_ASSERT(second != nullptr);
 
-    int result = stack_value_init(first, &options);
+    int result = stack_value_init(first, &allocator_options);
     TEST_ASSERT(result == VCVM_STATUS_SUCCESS);
 
-    result = stack_value_init(second, &options);
+    result = stack_value_init(second, &allocator_options);
     TEST_ASSERT(result == VCVM_STATUS_SUCCESS);
 
     stack_value_set_int(first, 5);
@@ -89,8 +89,8 @@ TEST(instruction_add)
     TEST_EXPECT(value->integer == 11);
 
     dispose((disposable_t*)value);
-    release(&options, value);
+    release(&allocator_options, value);
 
     dispose((disposable_t*)&vm);
-    dispose((disposable_t*)&options);
+    dispose((disposable_t*)&allocator_options);
 }

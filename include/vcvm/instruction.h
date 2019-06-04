@@ -85,6 +85,7 @@ extern const instruction_t CMP;
 extern const instruction_t CHECK_EQ;
 extern const instruction_t CHECK_LT;
 extern const instruction_t CHECK_GT;
+extern const instruction_t PUSH_CONTEXT_KEYS;
 
 extern const instruction_t* instructions[256];
 
