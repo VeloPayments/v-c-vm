@@ -11,4 +11,6 @@ typedef struct stack_cert
     vccert_parser_options_t* parser_options;
 } stack_cert_t;
 
+int stack_cert_init(stack_cert_t* cert, allocator_options_t* allocator_options, vccert_parser_options_t* parser_options);
+
 #endif  //VCVM_STACK_CERT_H
