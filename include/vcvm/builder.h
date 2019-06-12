@@ -12,6 +12,7 @@
 // This is entirely arbitrary.
 #define MAX_CONSTANTS 256
 #define MAX_INSTRUCTIONS 512
+#define MAX_JMPS 256
 
 #ifdef __cplusplus
 extern "C" {
@@ -39,6 +40,10 @@ typedef struct bytecode_builder
     hashmap_options_t integers_options;
     hashmap_t integers;
 
+    uint32_t jmp_count;
+    hashmap_options_t jmp_options;
+    hashmap_t jmp_table;
+
     uint32_t instruction_count;
     dynamic_array_options_t instructions_options;
     dynamic_array_t instructions;
@@ -63,6 +68,12 @@ typedef struct intrinsic_constant {
     uint32_t index;
     const intrinsic_t* value;
 } intrinsic_constant_t;
+
+typedef struct function_constant {
+    uint32_t index;
+    char* value;
+    uint32_t pc;
+} function_constant_t;
 
 int bytecode_builder_init(bytecode_builder_t* builder, allocator_options_t* allocator);
 

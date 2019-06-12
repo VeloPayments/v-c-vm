@@ -1,5 +1,5 @@
-#ifndef BUILD_ERROR_CODES_HEADER_GUARD
-#define BUILD_ERROR_CODES_HEADER_GUARD
+#ifndef VCVM_ERROR_CODES_HEADER_GUARD
+#define VCVM_ERROR_CODES_HEADER_GUARD
 
 /* make this header C++ friendly. */
 #ifdef __cplusplus

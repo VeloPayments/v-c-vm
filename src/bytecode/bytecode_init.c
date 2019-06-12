@@ -57,8 +57,16 @@ int bytecode_init(bytecode_t* bytecode, allocator_options_t* allocator_options, 
         goto free_instructions;
     }
 
+    result = bytecode_read_jmptable(bytecode, raw, size, &offset);
+    if (result != VCVM_STATUS_SUCCESS)
+    {
+        goto free_jmptable;
+    }
+
     goto done;
 
+free_jmptable:
+    bytecode_dispose_jmptable(bytecode);
 free_instructions:
     bytecode_dispose_instructions(bytecode);
 free_intrinsic_constants:

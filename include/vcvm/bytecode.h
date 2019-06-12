@@ -32,6 +32,9 @@ typedef struct bytecode
 
     uint32_t instruction_count;
     uint32_t* instructions;
+
+    uint32_t jmp_count;
+    uint32_t* jmp_table;
 } bytecode_t;
 
 int bytecode_init(bytecode_t* bytecode, allocator_options_t* allocator_options, const uint8_t* raw, size_t size, resolve_intrinsic_delegate_t resolve);

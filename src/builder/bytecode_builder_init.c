@@ -14,6 +14,9 @@ static bool compare_string_constant(const void* x, const void* y);
 static bool compare_uuid_constant(const void* x, const void* y);
 static bool compare_intrinsic_constant(const void* x, const void* y);
 static bool compare_int_constant(const void* x, const void* y);
+static bool compare_function_constant(const void* x, const void* y);
+
+static void dispose_function_constant(allocator_options_t* options, void* x);
 static void dispose_string_constant(allocator_options_t* options, void* x);
 
 static void simple_copy(void* destination, const void* source, size_t size);
@@ -28,6 +31,7 @@ int bytecode_builder_init(bytecode_builder_t* builder, allocator_options_t* allo
     builder->uuid_count = 0;
     builder->intrinsic_count = 0;
     builder->instruction_count = 0;
+    builder->jmp_count = 0;
 
     int result = hashmap_options_init_ex(
         &builder->string_options,
@@ -123,6 +127,28 @@ int bytecode_builder_init(bytecode_builder_t* builder, allocator_options_t* allo
 
     result = dynamic_array_init(&builder->instructions_options, &builder->instructions, MAX_INSTRUCTIONS, 0, NULL);
 
+    if (result != VCVM_STATUS_SUCCESS)
+    {
+        goto done;
+    }
+
+    result = hashmap_options_init_ex(
+        &builder->jmp_options,
+        builder->allocator_options,
+        MAX_JMPS,
+        &sdbm,
+        &compare_function_constant,
+        &simple_copy,
+        sizeof(function_constant_t),
+        &dispose_function_constant);
+
+    if (result != VCVM_STATUS_SUCCESS)
+    {
+        goto done;
+    }
+
+    result = hashmap_init(&builder->jmp_options, &builder->jmp_table);
+
 done:
     return result;
 }
@@ -137,11 +163,13 @@ void bytecode_builder_dispose(void* ctx)
     dispose((disposable_t*)&builder->uuids);
     dispose((disposable_t*)&builder->intrinsics);
     dispose((disposable_t*)&builder->instructions);
+    dispose((disposable_t*)&builder->jmp_table);
     dispose((disposable_t*)&builder->string_options);
     dispose((disposable_t*)&builder->integers_options);
     dispose((disposable_t*)&builder->uuid_options);
     dispose((disposable_t*)&builder->intrinsics_options);
     dispose((disposable_t*)&builder->instructions_options);
+    dispose((disposable_t*)&builder->jmp_options);
 }
 
 void dispose_string_constant(allocator_options_t* options, void* x)
@@ -153,11 +181,19 @@ void dispose_string_constant(allocator_options_t* options, void* x)
     release(options, x);
 }
 
+void dispose_function_constant(allocator_options_t* options, void* x)
+{
+    // See BLOC-233 as to why im using free directly.
+    function_constant_t* func_constant = (function_constant_t*)x;
+    free(func_constant->value);
+
+    release(options, x);
+}
+
 void simple_copy(void* destination, const void* source, size_t size)
 {
     memcpy(destination, source, size);
 }
-
 
 bool compare_int_constant(const void* x, const void* y)
 {

@@ -10,6 +10,7 @@ size_t bytecode_builder_total_size(bytecode_builder_t* builder)
     total += sizeof(uint32_t) + sizeof(int32_t) * builder->integer_count;
     total += sizeof(uint32_t) + INTRINSIC_SIZE * builder->intrinsic_count;
     total += sizeof(uint32_t) + (sizeof(uint32_t) * builder->string_count) + builder->string_size;
-    total += sizeof(uint32_t) + sizeof(uint32_t) * builder->instructions.elements;
+    total += sizeof(uint32_t) + sizeof(uint32_t) * builder->instruction_count;
+    total += sizeof(uint32_t) + sizeof(uint32_t) * builder->jmp_count;
     return total;
 }

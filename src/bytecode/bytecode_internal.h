@@ -21,12 +21,14 @@ int bytecode_read_string_constants(bytecode_t* bytecode, const uint8_t* raw, siz
 int bytecode_read_integer_constants(bytecode_t* bytecode, const uint8_t* raw, size_t size, size_t* offset);
 int bytecode_read_uuid_constants(bytecode_t *bytecode, const uint8_t *raw, size_t size, size_t *offset);
 int bytecode_read_intrinsic_constants(bytecode_t* bytecode, const uint8_t* raw, size_t size, size_t* offset, resolve_intrinsic_delegate_t pFunction);
+int bytecode_read_jmptable(bytecode_t *bytecode, const uint8_t *raw, size_t size, size_t *offset);
 
 void bytecode_dispose_instructions(bytecode_t* bytecode);
 void bytecode_dispose_string_constants(bytecode_t* bytecode);
 void bytecode_dispose_integer_constants(bytecode_t* bytecode);
 void bytecode_dispose_uuid_constants(bytecode_t *bytecode);
 void bytecode_dispose_intrinsic_constants(bytecode_t* bytecode);
+void bytecode_dispose_jmptable(bytecode_t* bytecode);
 
 #ifdef __cplusplus
 }
