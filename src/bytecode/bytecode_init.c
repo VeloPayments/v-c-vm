@@ -89,4 +89,5 @@ void bytecode_dispose(void* ctx)
     bytecode_dispose_uuid_constants(bytecode);
     bytecode_dispose_intrinsic_constants(bytecode);
     bytecode_dispose_instructions(bytecode);
+    bytecode_dispose_jmptable(bytecode);
 }

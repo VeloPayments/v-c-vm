@@ -195,6 +195,12 @@ void simple_copy(void* destination, const void* source, size_t size)
     memcpy(destination, source, size);
 }
 
+bool compare_function_constant(const void* x, const void* y)
+{
+    function_constant_t* right = (function_constant_t*)y;
+    return strcmp(right->value, (char*)x) == 0;
+}
+
 bool compare_int_constant(const void* x, const void* y)
 {
     integer_constant_t* right = (integer_constant_t*)y;
