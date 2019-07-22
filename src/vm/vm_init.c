@@ -10,6 +10,7 @@ int vm_init(vm_t* vm, allocator_options_t* allocator_options, vccert_parser_opti
     vm->allocator_options = allocator_options;
     vm->parser_options = parser_options;
     vm->sp = 0;
+    vm->ip = 0;
     vm->context_cert = context_cert;
     vm->bytecode = bytecode;
     return VCVM_STATUS_SUCCESS;
