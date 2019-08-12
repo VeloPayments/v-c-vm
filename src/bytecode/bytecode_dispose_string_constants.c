@@ -2,7 +2,7 @@
 #include <stddef.h>
 #include <stdint.h>
 
-void bytecode_dispose_string_constants(bytecode_t* bytecode)
+void bytecode_dispose_string_constants(vcvm_bytecode_t* bytecode)
 {
     for (uint32_t i = 0; i < bytecode->string_count; i++)
     {

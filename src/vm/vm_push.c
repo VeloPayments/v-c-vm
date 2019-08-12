@@ -1,7 +1,7 @@
 #include <vcvm/vm.h>
 #include <vcvm/error_codes.h>
 
-int vm_push(vm_t* vm, stack_value_t* value)
+int vcvm_vm_push(vcvm_vm_t* vm, vcvm_stack_value_t* value)
 {
     if (vm->sp + 1 > MAX_STACK_SIZE)
     {

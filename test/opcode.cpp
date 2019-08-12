@@ -33,18 +33,18 @@ TEST(sanity)
     TEST_EXPECT(bytes[3] == 0xD);
 }
 
-TEST(halt)
+TEST(vcvm_halt)
 {
     uint32_t i = 0xFF000000;
     uint8_t opcode = (i & (uint32_t)0xFF000000) >> (uint8_t)24;
-    const instruction_t* instr = instructions[opcode];
-    TEST_EXPECT(instr == &HALT);
+    const vcvm_instruction_t* instr = vcvm_instructions[opcode];
+    TEST_EXPECT(instr == &VCVM_HALT);
 }
 
-TEST(nop)
+TEST(vcvm_nop)
 {
     uint32_t i = 0x00000000;
     uint8_t opcode = (i & (uint32_t)0xFF000000) >> (uint8_t)24;
-    const instruction_t* instr = instructions[opcode];
-    TEST_EXPECT(instr == &NOP);
+    const vcvm_instruction_t* instr = vcvm_instructions[opcode];
+    TEST_EXPECT(instr == &VCVM_NOP);
 }

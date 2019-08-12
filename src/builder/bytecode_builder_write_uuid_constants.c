@@ -4,7 +4,7 @@
 #include <vcvm/size.h>
 #include <vcvm/error_codes.h>
 
-int bytecode_builder_write_uuid_constants(bytecode_builder_t *builder, uint8_t *byte, size_t *offset)
+int vcvm_bytecode_builder_write_uuid_constants(vcvm_bytecode_builder_t* builder, uint8_t* byte, size_t* offset)
 {
     doubly_linked_list_t** buckets = (doubly_linked_list_t**)builder->uuids.buckets;
     size_t cap = builder->uuids.options->capacity;
@@ -24,7 +24,7 @@ int bytecode_builder_write_uuid_constants(bytecode_builder_t *builder, uint8_t *
         while (element != NULL)
         {
             hashmap_entry_t* entry = (hashmap_entry_t*)element->data;
-            uuid_constant_t* uuid = (uuid_constant_t*) entry->val;
+            vcvm_uuid_constant_t* uuid = (vcvm_uuid_constant_t*)entry->val;
             memcpy(byte + *offset, uuid->value, UUID_SIZE);
             *offset += UUID_SIZE;
             element = element->next;

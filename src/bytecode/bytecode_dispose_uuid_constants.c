@@ -2,7 +2,7 @@
 #include <stddef.h>
 #include <stdint.h>
 
-void bytecode_dispose_uuid_constants(bytecode_t *bytecode)
+void bytecode_dispose_uuid_constants(vcvm_bytecode_t* bytecode)
 {
     for (uint32_t i = 0; i < bytecode->uuid_count; i++)
     {

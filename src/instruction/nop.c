@@ -2,17 +2,17 @@
 #include <vcvm/error_codes.h>
 #include <vpr/parameters.h>
 
-int nop(vm_t* UNUSED(vm))
+int vcvm_nop(vcvm_vm_t* UNUSED(vm))
 {
     // Guess what this does!
     return VCVM_STATUS_SUCCESS;
     // Nothing!
 }
 
-const instruction_t NOP = {
+const vcvm_instruction_t VCVM_NOP = {
     .name = "NOP",
     .arity = 0,
     .handler = {
-        .arity0 = &nop,
+        .arity0 = &vcvm_nop,
     }
 };

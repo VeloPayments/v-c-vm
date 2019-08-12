@@ -2,7 +2,7 @@
 #include <string.h>
 #include <vcvm/error_codes.h>
 
-int bytecode_builder_write_instructions(bytecode_builder_t* builder, uint8_t* byte, size_t* offset)
+int vcvm_bytecode_builder_write_instructions(vcvm_bytecode_builder_t* builder, uint8_t* byte, size_t* offset)
 {
     memcpy(byte + *offset, &builder->instruction_count, sizeof(uint32_t));
     *offset += sizeof(uint32_t);

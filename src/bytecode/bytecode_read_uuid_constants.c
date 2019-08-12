@@ -4,7 +4,7 @@
 #include <string.h>
 #include "bytecode_internal.h"
 
-int bytecode_read_uuid_constants(bytecode_t *bytecode, const uint8_t *raw, size_t size, size_t *offset)
+int bytecode_read_uuid_constants(vcvm_bytecode_t* bytecode, const uint8_t* raw, size_t size, size_t* offset)
 {
     int result;
     result = bytecode_read_uint32(&bytecode->uuid_count, raw, size, offset);

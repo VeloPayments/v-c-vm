@@ -3,10 +3,10 @@
 #include <vcvm/vm.h>
 #include <vpr/parameters.h>
 
-int pop(vm_t* vm)
+int vcvcvm_vm_pop(vcvm_vm_t* vm)
 {
-    stack_value_t* value;
-    int result = vm_pop(vm, &value);
+    vcvm_stack_value_t* value;
+    int result = vcvm_vm_pop(vm, &value);
     if (result != VCVM_STATUS_SUCCESS)
     {
         return result;
@@ -16,10 +16,10 @@ int pop(vm_t* vm)
     return VCVM_STATUS_SUCCESS;
 }
 
-const instruction_t POP = {
+const vcvm_instruction_t VCVM_POP = {
     .name = "POP",
     .arity = 0,
     .handler = {
-        .arity0 = &pop,
+        .arity0 = &vcvcvm_vm_pop,
     }
 };

@@ -6,9 +6,9 @@
 #include <string.h>
 
 
-int stack_value_set_uuid(stack_value_t* value, uint8_t* uuid)
+int vcvm_stack_value_set_uuid(vcvm_stack_value_t* value, uint8_t* uuid)
 {
-    value->type = STACK_VALUE_TYPE_STRING;
+    value->type = VCVM_STACK_VALUE_TYPE_STRING;
     value->uuid = (uint8_t*)allocate(value->allocator_options, UUID_SIZE);
     if (value->uuid == NULL)
     {

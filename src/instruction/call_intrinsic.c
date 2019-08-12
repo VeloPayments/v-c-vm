@@ -1,17 +1,15 @@
 #include <vcvm/instruction.h>
 #include <vcvm/error_codes.h>
 #include <vcvm/vm.h>
-#include <vcvm/stack_value.h>
-#include <vpr/parameters.h>
 
-int call_intrinsic(vm_t* vm, uint32_t a)
+int vcvm_call_intrinsic(vcvm_vm_t* vm, uint32_t a)
 {
     if (a > vm->bytecode->intrinsics_count)
     {
         return VCVM_ERROR_VM_BAD_CONSTANT_COUNT;
     }
 
-    const intrinsic_t* intrinsic = vm->bytecode->intrinsics[a];
+    const vcvm_intrinsic_t* intrinsic = vm->bytecode->intrinsics[a];
 
     if (vm->sp + intrinsic->nrets > MAX_STACK_SIZE)
     {
@@ -27,10 +25,10 @@ int call_intrinsic(vm_t* vm, uint32_t a)
 }
 
 
-const instruction_t CALL_INTRINSIC = {
+const vcvm_instruction_t VCVM_CALL_INTRINSIC = {
     .name = "CALL_INTRINSIC",
     .arity = 1,
     .handler = {
-        .arity1 = &call_intrinsic,
+        .arity1 = &vcvm_call_intrinsic,
     }
 };

@@ -6,12 +6,12 @@
 extern "C" {
 #endif  //__cplusplus
 
-int bytecode_builder_write_integer_constants(bytecode_builder_t* builder, uint8_t* byte, size_t* offset);
-int bytecode_builder_write_string_constants(bytecode_builder_t* builder, uint8_t* byte, size_t* offset);
-int bytecode_builder_write_uuid_constants(bytecode_builder_t* builder, uint8_t* byte, size_t* offset);
-int bytecode_builder_write_intrinsic_constants(bytecode_builder_t* builder, uint8_t* byte, size_t* offset);
-int bytecode_builder_write_instructions(bytecode_builder_t* builder, uint8_t* byte, size_t* offset);
-int bytecode_builder_write_jmptable(bytecode_builder_t* builder, uint8_t* byte, size_t* offset);
+int vcvm_bytecode_builder_write_integer_constants(vcvm_bytecode_builder_t* builder, uint8_t* byte, size_t* offset);
+int vcvm_bytecode_builder_write_string_constants(vcvm_bytecode_builder_t* builder, uint8_t* byte, size_t* offset);
+int vcvm_bytecode_builder_write_uuid_constants(vcvm_bytecode_builder_t* builder, uint8_t* byte, size_t* offset);
+int vcvm_bytecode_builder_write_intrinsic_constants(vcvm_bytecode_builder_t* builder, uint8_t* byte, size_t* offset);
+int vcvm_bytecode_builder_write_instructions(vcvm_bytecode_builder_t* builder, uint8_t* byte, size_t* offset);
+int vcvm_bytecode_builder_write_jmptable(vcvm_bytecode_builder_t* builder, uint8_t* byte, size_t* offset);
 
 #ifdef __cplusplus
 }

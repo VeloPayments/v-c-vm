@@ -1,8 +1,7 @@
 #include <vcvm/bytecode.h>
 #include <stddef.h>
-#include <stdint.h>
 
-void bytecode_dispose_integer_constants(bytecode_t* bytecode)
+void bytecode_dispose_integer_constants(vcvm_bytecode_t* bytecode)
 {
     if (bytecode->integers != NULL)
     {

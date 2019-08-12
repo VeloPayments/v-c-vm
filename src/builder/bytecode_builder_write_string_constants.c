@@ -3,7 +3,7 @@
 #include <vpr/doubly_linked_list.h>
 #include <string.h>
 
-int bytecode_builder_write_string_constants(bytecode_builder_t* builder, uint8_t* byte, size_t* offset)
+int vcvm_bytecode_builder_write_string_constants(vcvm_bytecode_builder_t* builder, uint8_t* byte, size_t* offset)
 {
     doubly_linked_list_t** buckets = (doubly_linked_list_t**)builder->strings.buckets;
     size_t cap = builder->strings.options->capacity;
@@ -23,7 +23,7 @@ int bytecode_builder_write_string_constants(bytecode_builder_t* builder, uint8_t
         while (element != NULL)
         {
             hashmap_entry_t* entry = (hashmap_entry_t*)element->data;
-            string_constant_t* cstr = (string_constant_t*)entry->val;
+            vcvm_string_constant_t* cstr = (vcvm_string_constant_t*)entry->val;
 
             size_t len = strlen(cstr->value);
 

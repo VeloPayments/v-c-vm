@@ -4,46 +4,46 @@
 #include <vcvm/stack_value.h>
 #include <vpr/parameters.h>
 
-int rshift(vm_t* vm)
+int vcvm_rshift(vcvm_vm_t* vm)
 {
     int result;
-    stack_value_t* left;
-    stack_value_t* right;
+    vcvm_stack_value_t* left;
+    vcvm_stack_value_t* right;
 
-    result = vm_pop(vm, &right);
+    result = vcvm_vm_pop(vm, &right);
     if (result != VCVM_STATUS_SUCCESS)
     {
         return result;
     }
 
-    result = vm_pop(vm, &left);
+    result = vcvm_vm_pop(vm, &left);
     if (result != VCVM_STATUS_SUCCESS)
     {
         goto cleanup_right;
     }
 
-    if (left->type != STACK_VALUE_TYPE_INTEGER || right->type != STACK_VALUE_TYPE_INTEGER)
+    if (left->type != VCVM_STACK_VALUE_TYPE_INTEGER || right->type != VCVM_STACK_VALUE_TYPE_INTEGER)
     {
         result = VCVM_ERROR_VM_BAD_TYPES;
         goto cleanup_both;
     }
 
-    stack_value_t* value = (stack_value_t*)allocate(vm->allocator_options, sizeof(stack_value_t));
+    vcvm_stack_value_t* value = (vcvm_stack_value_t*)allocate(vm->allocator_options, sizeof(vcvm_stack_value_t));
     if (value == NULL)
     {
         result = VCVM_ERROR_VM_BAD_TYPES;
         goto cleanup_both;
     }
 
-    stack_value_init(value, vm->allocator_options);
-    result = stack_value_set_int(value, left->integer >> right->integer);
+    vcvm_stack_value_init(value, vm->allocator_options);
+    result = vcvm_stack_value_set_int(value, left->integer >> right->integer);
     if (result != VCVM_STATUS_SUCCESS)
     {
         result = VCVM_ERROR_CANT_ALLOCATE;
         goto cleanup_both;
     }
 
-    result = vm_push(vm, value);
+    result = vcvm_vm_push(vm, value);
 
 cleanup_both:
     dispose((disposable_t*)left);
@@ -57,10 +57,10 @@ cleanup_right:
 }
 
 
-const instruction_t RSHIFT = {
+const vcvm_instruction_t VCVM_RSHIFT = {
     .name = "RSHIFT",
     .arity = 0,
     .handler = {
-        .arity0 = &rshift,
+        .arity0 = &vcvm_rshift,
     }
 };

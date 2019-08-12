@@ -1,4 +1,3 @@
-#include <vpr/parameters.h>
 #include <vcvm/builder.h>
 #include <vpr/allocator.h>
 #include <vcvm/error_codes.h>
@@ -21,7 +20,7 @@ static void dispose_string_constant(allocator_options_t* options, void* x);
 
 static void simple_copy(void* destination, const void* source, size_t size);
 
-int bytecode_builder_init(bytecode_builder_t* builder, allocator_options_t* allocator)
+int vcvm_bytecode_builder_init(vcvm_bytecode_builder_t* builder, allocator_options_t* allocator)
 {
     builder->hdr.dispose = &bytecode_builder_dispose;
     builder->allocator_options = allocator;
@@ -40,7 +39,7 @@ int bytecode_builder_init(bytecode_builder_t* builder, allocator_options_t* allo
         &sdbm,
         &compare_string_constant,
         &simple_copy,
-        sizeof(string_constant_t),
+        sizeof(vcvm_string_constant_t),
         &dispose_string_constant);
 
     if (result != VCVM_STATUS_SUCCESS)
@@ -54,7 +53,7 @@ int bytecode_builder_init(bytecode_builder_t* builder, allocator_options_t* allo
         MAX_CONSTANTS,
         &compare_int_constant,
         true,
-        sizeof(integer_constant_t),
+        sizeof(vcvm_integer_constant_t),
         true);
 
     if (result != VCVM_STATUS_SUCCESS)
@@ -68,7 +67,7 @@ int bytecode_builder_init(bytecode_builder_t* builder, allocator_options_t* allo
         MAX_CONSTANTS,
         &compare_uuid_constant,
         true,
-        sizeof(uuid_constant_t),
+        sizeof(vcvm_uuid_constant_t),
         true);
 
     if (result != VCVM_STATUS_SUCCESS)
@@ -82,7 +81,7 @@ int bytecode_builder_init(bytecode_builder_t* builder, allocator_options_t* allo
         MAX_CONSTANTS,
         &compare_intrinsic_constant,
         true,
-        sizeof(intrinsic_constant_t),
+        sizeof(vcvm_intrinsic_constant_t),
         true);
 
     if (result != VCVM_STATUS_SUCCESS)
@@ -139,7 +138,7 @@ int bytecode_builder_init(bytecode_builder_t* builder, allocator_options_t* allo
         &sdbm,
         &compare_function_constant,
         &simple_copy,
-        sizeof(function_constant_t),
+        sizeof(vcvm_function_constant_t),
         &dispose_function_constant);
 
     if (result != VCVM_STATUS_SUCCESS)
@@ -155,7 +154,7 @@ done:
 
 void bytecode_builder_dispose(void* ctx)
 {
-    bytecode_builder_t* builder = (bytecode_builder_t*)ctx;
+    vcvm_bytecode_builder_t* builder = (vcvm_bytecode_builder_t*)ctx;
 
     // I didn't intend for this text to cascade.
     dispose((disposable_t*)&builder->strings);
@@ -175,7 +174,7 @@ void bytecode_builder_dispose(void* ctx)
 void dispose_string_constant(allocator_options_t* options, void* x)
 {
     // See BLOC-233 as to why im using free directly.
-    string_constant_t* string_constant = (string_constant_t*)x;
+    vcvm_string_constant_t* string_constant = (vcvm_string_constant_t*)x;
     free(string_constant->value);
 
     release(options, x);
@@ -184,7 +183,7 @@ void dispose_string_constant(allocator_options_t* options, void* x)
 void dispose_function_constant(allocator_options_t* options, void* x)
 {
     // See BLOC-233 as to why im using free directly.
-    function_constant_t* func_constant = (function_constant_t*)x;
+    vcvm_function_constant_t* func_constant = (vcvm_function_constant_t*)x;
     free(func_constant->value);
 
     release(options, x);
@@ -197,7 +196,7 @@ void simple_copy(void* destination, const void* source, size_t size)
 
 bool compare_int_constant(const void* x, const void* y)
 {
-    integer_constant_t* right = (integer_constant_t*)y;
+    vcvm_integer_constant_t* right = (vcvm_integer_constant_t*)y;
     int32_t left = *(int32_t*)x;
 
     return right->value == left;
@@ -205,20 +204,26 @@ bool compare_int_constant(const void* x, const void* y)
 
 bool compare_intrinsic_constant(const void* x, const void* y)
 {
-    intrinsic_constant_t* right = (intrinsic_constant_t*)y;
+    vcvm_intrinsic_constant_t* right = (vcvm_intrinsic_constant_t*)y;
     uint8_t* left = (uint8_t*)x;
     return memcmp(right->value->uuid, left, UUID_SIZE) == 0;
 }
 
 bool compare_uuid_constant(const void* x, const void* y)
 {
-    uuid_constant_t* right = (uuid_constant_t*)y;
+    vcvm_uuid_constant_t* right = (vcvm_uuid_constant_t*)y;
     uint8_t* left = (uint8_t*)x;
     return memcmp(right->value, left, UUID_SIZE) == 0;
 }
 
 bool compare_string_constant(const void* x, const void* y)
 {
-    string_constant_t* right = (string_constant_t*)y;
+    vcvm_string_constant_t* right = (vcvm_string_constant_t*)y;
+    return strcmp(right->value, (char*)x) == 0;
+}
+
+bool compare_function_constant(const void* x, const void* y)
+{
+    vcvm_function_constant_t* right = (vcvm_function_constant_t*)y;
     return strcmp(right->value, (char*)x) == 0;
 }

@@ -4,7 +4,7 @@
 #include <string.h>
 #include <vcvm/error_codes.h>
 
-int bytecode_builder_write_intrinsic_constants(bytecode_builder_t* builder, uint8_t* byte, size_t* offset)
+int vcvm_bytecode_builder_write_intrinsic_constants(vcvm_bytecode_builder_t* builder, uint8_t* byte, size_t* offset)
 {
     doubly_linked_list_t** buckets = (doubly_linked_list_t**)builder->intrinsics.buckets;
     size_t cap = builder->intrinsics.options->capacity;
@@ -24,7 +24,7 @@ int bytecode_builder_write_intrinsic_constants(bytecode_builder_t* builder, uint
         while (element != NULL)
         {
             hashmap_entry_t* entry = (hashmap_entry_t*)element->data;
-            intrinsic_constant_t* intrinsic = (intrinsic_constant_t*)entry->val;
+            vcvm_intrinsic_constant_t* intrinsic = (vcvm_intrinsic_constant_t*)entry->val;
 
             memcpy(byte + *offset, intrinsic->value->uuid, UUID_SIZE);
             *offset += UUID_SIZE;

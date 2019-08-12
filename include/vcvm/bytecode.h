@@ -11,7 +11,7 @@
 extern "C" {
 #endif  //__cplusplus
 
-typedef struct bytecode
+typedef struct vcvm_bytecode
 {
     disposable_t hdr;
     allocator_options_t* allocator_options;
@@ -28,16 +28,16 @@ typedef struct bytecode
     uint8_t** uuids;
 
     uint32_t intrinsics_count;
-    const intrinsic_t** intrinsics;
+    const vcvm_intrinsic_t** intrinsics;
 
     uint32_t instruction_count;
     uint32_t* instructions;
 
     uint32_t jmp_count;
     uint32_t* jmp_table;
-} bytecode_t;
+} vcvm_bytecode_t;
 
-int bytecode_init(bytecode_t* bytecode, allocator_options_t* allocator_options, const uint8_t* raw, size_t size, resolve_intrinsic_delegate_t resolve);
+int vcvm_bytecode_init(vcvm_bytecode_t* bytecode, allocator_options_t* allocator_options, const uint8_t* raw, size_t size, vcvm_resolve_intrinsic_delegate_t resolve);
 
 #ifdef __cplusplus
 }

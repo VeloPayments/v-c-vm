@@ -1,5 +1,4 @@
 #include <vcvm/bytecode.h>
-#include <vpr/parameters.h>
 #include <vcvm/error_codes.h>
 #include <string.h>
 
@@ -7,7 +6,7 @@
 
 static void bytecode_dispose(void* ctx);
 
-int bytecode_init(bytecode_t* bytecode, allocator_options_t* allocator_options, const uint8_t* raw, size_t size, resolve_intrinsic_delegate_t resolve)
+int vcvm_bytecode_init(vcvm_bytecode_t* bytecode, allocator_options_t* allocator_options, const uint8_t* raw, size_t size, vcvm_resolve_intrinsic_delegate_t resolve)
 {
     bytecode->hdr.dispose = &bytecode_dispose;
     bytecode->allocator_options = allocator_options;
@@ -68,7 +67,7 @@ int bytecode_init(bytecode_t* bytecode, allocator_options_t* allocator_options, 
 free_jmptable:
     bytecode_dispose_jmptable(bytecode);
 free_instructions:
-    bytecode_dispose_instructions(bytecode);
+    vcvm_bytecode_dispose_instructions(bytecode);
 free_intrinsic_constants:
     bytecode_dispose_intrinsic_constants(bytecode);
 free_uuid_constants:
@@ -83,10 +82,11 @@ done:
 
 void bytecode_dispose(void* ctx)
 {
-    bytecode_t* bytecode = (bytecode_t*)ctx;
+    vcvm_bytecode_t* bytecode = (vcvm_bytecode_t*)ctx;
     bytecode_dispose_integer_constants(bytecode);
     bytecode_dispose_string_constants(bytecode);
     bytecode_dispose_uuid_constants(bytecode);
     bytecode_dispose_intrinsic_constants(bytecode);
-    bytecode_dispose_instructions(bytecode);
+    vcvm_bytecode_dispose_instructions(bytecode);
+    bytecode_dispose_jmptable(bytecode);
 }

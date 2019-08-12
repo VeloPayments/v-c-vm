@@ -1,7 +1,7 @@
 #include <vcvm/instruction.h>
 #include <vcvm/vm.h>
 
-int vm_decode_and_execute_arity_2(vm_t* vm, const instruction_t* instr)
+int vcvm_vm_decode_and_execute_arity_2(vcvm_vm_t* vm, const vcvm_instruction_t* instr)
 {
     uint32_t i = *(vm->bytecode->instructions + vm->ip++);
     uint16_t a = (i & (uint32_t)0x00fff000) >> (uint8_t)12;

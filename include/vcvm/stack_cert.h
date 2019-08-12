@@ -3,14 +3,14 @@
 
 #include <vccert/parser.h>
 
-typedef struct stack_cert
+typedef struct vcvm_stack_cert
 {
     disposable_t hdr;
     allocator_options_t* allocator_options;
     vccert_parser_context_t* parser_context;
     vccert_parser_options_t* parser_options;
-} stack_cert_t;
+} vcvm_stack_cert_t;
 
-int stack_cert_init(stack_cert_t* cert, allocator_options_t* allocator_options, vccert_parser_options_t* parser_options);
+int vcvm_stack_cert_init(vcvm_stack_cert_t* cert, allocator_options_t* allocator_options, vccert_parser_options_t* parser_options);
 
 #endif  //VCVM_STACK_CERT_H

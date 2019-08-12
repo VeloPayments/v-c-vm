@@ -3,7 +3,7 @@
 #include <vcvm/error_codes.h>
 #include <vpr/doubly_linked_list.h>
 
-int bytecode_builder_write_jmptable(bytecode_builder_t* builder, uint8_t* byte, size_t* offset)
+int vcvm_bytecode_builder_write_jmptable(vcvm_bytecode_builder_t* builder, uint8_t* byte, size_t* offset)
 {
     doubly_linked_list_t** buckets = (doubly_linked_list_t**)builder->jmp_table.buckets;
     size_t cap = builder->jmp_table.options->capacity;
@@ -23,7 +23,7 @@ int bytecode_builder_write_jmptable(bytecode_builder_t* builder, uint8_t* byte, 
         while (element != NULL)
         {
             hashmap_entry_t* entry = (hashmap_entry_t*)element->data;
-            function_constant_t* func = (function_constant_t*) entry;
+            vcvm_function_constant_t* func = (vcvm_function_constant_t*)entry;
 
             memcpy(byte + *offset, &func->pc, sizeof(uint32_t));
             *offset += sizeof(uint32_t);

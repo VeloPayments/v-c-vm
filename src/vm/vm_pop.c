@@ -1,7 +1,7 @@
 #include <vcvm/vm.h>
 #include <vcvm/error_codes.h>
 
-int vm_pop(vm_t* vm, stack_value_t** value)
+int vcvm_vm_pop(vcvm_vm_t* vm, vcvm_stack_value_t** value)
 {
     if (vm->sp == 0)
     {

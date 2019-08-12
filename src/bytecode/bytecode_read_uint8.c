@@ -2,7 +2,6 @@
 #include <stdint.h>
 #include <vcvm/error_codes.h>
 #include <string.h>
-#include <netinet/in.h>
 
 int bytecode_read_uint8(uint8_t* out, const uint8_t* raw, size_t size, size_t* offset)
 {

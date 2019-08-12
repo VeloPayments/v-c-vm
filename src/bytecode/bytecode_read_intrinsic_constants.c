@@ -7,7 +7,7 @@
 #include "bytecode_internal.h"
 
 
-int bytecode_read_intrinsic_constants(bytecode_t* bytecode, const uint8_t* raw, size_t size, size_t* offset, resolve_intrinsic_delegate_t resolve)
+int bytecode_read_intrinsic_constants(vcvm_bytecode_t* bytecode, const uint8_t* raw, size_t size, size_t* offset, vcvm_resolve_intrinsic_delegate_t resolve)
 {
     int result = bytecode_read_uint32(&bytecode->intrinsics_count, raw, size, offset);
     if (result != VCVM_STATUS_SUCCESS)
@@ -15,10 +15,10 @@ int bytecode_read_intrinsic_constants(bytecode_t* bytecode, const uint8_t* raw, 
         goto done;
     }
 
-    bytecode->intrinsics = (const intrinsic_t**)allocate(
+    bytecode->intrinsics = (const vcvm_intrinsic_t**)allocate(
         bytecode->allocator_options,
 
-        sizeof(intrinsic_t*) * bytecode->intrinsics_count);
+        sizeof(vcvm_intrinsic_t*) * bytecode->intrinsics_count);
 
     if (bytecode->intrinsics == NULL)
     {
@@ -26,7 +26,7 @@ int bytecode_read_intrinsic_constants(bytecode_t* bytecode, const uint8_t* raw, 
         goto done;
     }
 
-    memset(bytecode->intrinsics, 0, sizeof(intrinsic_t*) * bytecode->intrinsics_count);
+    memset(bytecode->intrinsics, 0, sizeof(vcvm_intrinsic_t*) * bytecode->intrinsics_count);
 
     for (uint32_t i = 0; i < bytecode->intrinsics_count; i++)
     {
@@ -57,7 +57,7 @@ int bytecode_read_intrinsic_constants(bytecode_t* bytecode, const uint8_t* raw, 
             goto done;
         }
 
-        const intrinsic_t* intrinsic = NULL;
+        const vcvm_intrinsic_t* intrinsic = NULL;
         result = resolve(&intrinsic, uuid, nargs, nrets);
         if (result != VCVM_STATUS_SUCCESS)
         {

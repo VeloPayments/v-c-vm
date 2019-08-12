@@ -4,7 +4,7 @@
 
 static void vm_dispose(void* ctx);
 
-int vm_init(vm_t* vm, allocator_options_t* allocator_options, vccert_parser_options_t* parser_options, uint8_t* context_cert, bytecode_t* bytecode)
+int vcvm_vm_init(vcvm_vm_t* vm, allocator_options_t* allocator_options, vccert_parser_options_t* parser_options, uint8_t* context_cert, vcvm_bytecode_t* bytecode)
 {
     vm->hdr.dispose = &vm_dispose;
     vm->allocator_options = allocator_options;
@@ -17,7 +17,7 @@ int vm_init(vm_t* vm, allocator_options_t* allocator_options, vccert_parser_opti
 
 void vm_dispose(void* ctx)
 {
-    vm_t* vm = (vm_t*)ctx;
+    vcvm_vm_t* vm = (vcvm_vm_t*)ctx;
     if (vm->bytecode != NULL)
     {
         dispose((disposable_t*)vm->bytecode);

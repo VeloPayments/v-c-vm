@@ -1,11 +1,10 @@
 #include <vcvm/bytecode.h>
 #include <vcvm/error_codes.h>
 #include <stdint.h>
-#include <stdlib.h>
 #include <string.h>
 #include "bytecode_internal.h"
 
-int bytecode_read_jmptable(bytecode_t* bytecode, const uint8_t* raw, size_t size, size_t* offset)
+int bytecode_read_jmptable(vcvm_bytecode_t* bytecode, const uint8_t* raw, size_t size, size_t* offset)
 {
     int result;
     result = bytecode_read_uint32(&bytecode->jmp_count, raw, size, offset);

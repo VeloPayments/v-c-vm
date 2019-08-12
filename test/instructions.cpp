@@ -12,34 +12,34 @@ TEST(instruction_subtract)
     allocator_options_t allocator_options;
     malloc_allocator_options_init(&allocator_options);
 
-    vm_t vm;
-    vm_init(&vm, &allocator_options, nullptr, nullptr, nullptr);
+    vcvm_vm_t vm;
+    vcvm_vm_init(&vm, &allocator_options, nullptr, nullptr, nullptr);
 
-    auto first = (stack_value_t*)allocate(&allocator_options, sizeof(stack_value_t));
+    auto first = (vcvm_stack_value_t*)allocate(&allocator_options, sizeof(vcvm_stack_value_t));
     TEST_ASSERT(first != nullptr);
-    auto second = (stack_value_t*)allocate(&allocator_options, sizeof(stack_value_t));
+    auto second = (vcvm_stack_value_t*)allocate(&allocator_options, sizeof(vcvm_stack_value_t));
     TEST_ASSERT(second != nullptr);
 
-    int result = stack_value_init(first, &allocator_options);
+    int result = vcvm_stack_value_init(first, &allocator_options);
     TEST_ASSERT(result == VCVM_STATUS_SUCCESS);
 
-    result = stack_value_init(second, &allocator_options);
+    result = vcvm_stack_value_init(second, &allocator_options);
     TEST_ASSERT(result == VCVM_STATUS_SUCCESS);
 
-    stack_value_set_int(first, 6);
-    stack_value_set_int(second, 5);
+    vcvm_stack_value_set_int(first, 6);
+    vcvm_stack_value_set_int(second, 5);
 
-    result = vm_push(&vm, first);
+    result = vcvm_vm_push(&vm, first);
     TEST_ASSERT(result == VCVM_STATUS_SUCCESS);
 
-    result = vm_push(&vm, second);
+    result = vcvm_vm_push(&vm, second);
     TEST_ASSERT(result == VCVM_STATUS_SUCCESS);
 
-    result = subtract(&vm);
+    result = vcvm_subtract(&vm);
     TEST_EXPECT(result == VCVM_STATUS_SUCCESS);
 
-    stack_value_t* value;
-    result = vm_pop(&vm, &value);
+    vcvm_stack_value_t* value;
+    result = vcvm_vm_pop(&vm, &value);
     TEST_EXPECT(result == VCVM_STATUS_SUCCESS);
 
     TEST_EXPECT(value->integer == 1);
@@ -56,34 +56,34 @@ TEST(instruction_add)
     allocator_options_t allocator_options;
     malloc_allocator_options_init(&allocator_options);
 
-    vm_t vm;
-    vm_init(&vm, &allocator_options, nullptr, nullptr, nullptr);
+    vcvm_vm_t vm;
+    vcvm_vm_init(&vm, &allocator_options, nullptr, nullptr, nullptr);
 
-    auto first = (stack_value_t*)allocate(&allocator_options, sizeof(stack_value_t));
+    auto first = (vcvm_stack_value_t*)allocate(&allocator_options, sizeof(vcvm_stack_value_t));
     TEST_ASSERT(first != nullptr);
-    auto second = (stack_value_t*)allocate(&allocator_options, sizeof(stack_value_t));
+    auto second = (vcvm_stack_value_t*)allocate(&allocator_options, sizeof(vcvm_stack_value_t));
     TEST_ASSERT(second != nullptr);
 
-    int result = stack_value_init(first, &allocator_options);
+    int result = vcvm_stack_value_init(first, &allocator_options);
     TEST_ASSERT(result == VCVM_STATUS_SUCCESS);
 
-    result = stack_value_init(second, &allocator_options);
+    result = vcvm_stack_value_init(second, &allocator_options);
     TEST_ASSERT(result == VCVM_STATUS_SUCCESS);
 
-    stack_value_set_int(first, 5);
-    stack_value_set_int(second, 6);
+    vcvm_stack_value_set_int(first, 5);
+    vcvm_stack_value_set_int(second, 6);
 
-    result = vm_push(&vm, first);
+    result = vcvm_vm_push(&vm, first);
     TEST_ASSERT(result == VCVM_STATUS_SUCCESS);
 
-    result = vm_push(&vm, second);
+    result = vcvm_vm_push(&vm, second);
     TEST_ASSERT(result == VCVM_STATUS_SUCCESS);
 
-    result = add(&vm);
+    result = vcvm_add(&vm);
     TEST_EXPECT(result == VCVM_STATUS_SUCCESS);
 
-    stack_value_t* value;
-    result = vm_pop(&vm, &value);
+    vcvm_stack_value_t* value;
+    result = vcvm_vm_pop(&vm, &value);
     TEST_EXPECT(result == VCVM_STATUS_SUCCESS);
 
     TEST_EXPECT(value->integer == 11);

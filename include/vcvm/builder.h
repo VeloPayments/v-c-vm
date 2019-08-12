@@ -18,7 +18,7 @@
 extern "C" {
 #endif  //__cplusplus
 
-typedef struct bytecode_builder
+typedef struct vcvm_bytecode_builder
 {
     disposable_t hdr;
     allocator_options_t* allocator_options;
@@ -47,45 +47,49 @@ typedef struct bytecode_builder
     uint32_t instruction_count;
     dynamic_array_options_t instructions_options;
     dynamic_array_t instructions;
-} bytecode_builder_t;
+} vcvm_bytecode_builder_t;
 
-typedef struct string_constant {
+typedef struct vcvm_string_constant
+{
     uint32_t index;
     char* value;
-} string_constant_t;
+} vcvm_string_constant_t;
 
-typedef struct int_constant {
+typedef struct vcvm_int_constant
+{
     uint32_t index;
     int32_t value;
-} integer_constant_t;
+} vcvm_integer_constant_t;
 
-typedef struct uuid_constant {
+typedef struct vcvm_uuid_constant
+{
     uint32_t index;
     uint8_t* value;
-} uuid_constant_t;
+} vcvm_uuid_constant_t;
 
-typedef struct intrinsic_constant {
+typedef struct vcvm_intrinsic_constant
+{
     uint32_t index;
-    const intrinsic_t* value;
-} intrinsic_constant_t;
+    const vcvm_intrinsic_t* value;
+} vcvm_intrinsic_constant_t;
 
-typedef struct function_constant {
+typedef struct vcvm_function_constant
+{
     uint32_t index;
     char* value;
     uint32_t pc;
-} function_constant_t;
+} vcvm_function_constant_t;
 
-int bytecode_builder_init(bytecode_builder_t* builder, allocator_options_t* allocator);
+int vcvm_bytecode_builder_init(vcvm_bytecode_builder_t* builder, allocator_options_t* allocator);
 
-int bytecode_builder_add_string(bytecode_builder_t* builder, char* string);
-int bytecode_builder_add_int(bytecode_builder_t* builder, int32_t num);
-int bytecode_builder_add_uuid(bytecode_builder_t *builder, uint8_t *uuid);
-int bytecode_builder_add_intrinsic(bytecode_builder_t* builder, const intrinsic_t* intrinsic);
-int bytecode_builder_add_instruction(bytecode_builder_t* builder, uint32_t instruction);
+int vcvm_bytecode_builder_add_string(vcvm_bytecode_builder_t* builder, char* string);
+int vcvm_bytecode_builder_add_int(vcvm_bytecode_builder_t* builder, int32_t num);
+int vcvm_bytecode_builder_add_uuid(vcvm_bytecode_builder_t* builder, uint8_t* uuid);
+int vcvm_bytecode_builder_add_intrinsic(vcvm_bytecode_builder_t* builder, const vcvm_intrinsic_t* intrinsic);
+int vcvm_bytecode_builder_add_instruction(vcvm_bytecode_builder_t* builder, uint32_t instruction);
 
-size_t bytecode_builder_total_size(bytecode_builder_t* builder);
-int bytecode_builder_emit(bytecode_builder_t* builder, uint8_t* bytes, size_t size, size_t* written);
-
+size_t vcvm_bytecode_builder_total_size(vcvm_bytecode_builder_t* builder);
+int vcvm_bytecode_builder_emit(vcvm_bytecode_builder_t* builder, uint8_t* bytes, size_t size, size_t* written);
 
 
 #ifdef __cplusplus

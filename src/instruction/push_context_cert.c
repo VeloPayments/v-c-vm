@@ -6,29 +6,29 @@
 #include <vcvm/stack_value.h>
 #include <include/vcvm/vm.h>
 
-int push_context_cert(vm_t* vm)
+int vcvm_push_context_cert(vcvm_vm_t* vm)
 {
     int result = VCVM_STATUS_SUCCESS;
 
-    stack_cert_t* cert = (stack_cert_t*)allocate(vm->allocator_options, sizeof(stack_cert_t));
+    vcvm_stack_cert_t* cert = (vcvm_stack_cert_t*)allocate(vm->allocator_options, sizeof(vcvm_stack_cert_t));
     if (cert == NULL)
     {
         result = VCVM_ERROR_CANT_ALLOCATE;
         goto done;
     }
 
-    stack_value_t* value = (stack_value_t*)allocate(vm->allocator_options, sizeof(stack_value_t));
+    vcvm_stack_value_t* value = (vcvm_stack_value_t*)allocate(vm->allocator_options, sizeof(vcvm_stack_value_t));
     if (value == NULL)
     {
         result = VCVM_ERROR_CANT_ALLOCATE;
         goto free_cert;
     }
 
-    stack_cert_init(cert, vm->allocator_options, vm->parser_options);
-    stack_value_init(value, vm->allocator_options);
-    stack_value_set_cert(value, cert);
+    vcvm_stack_cert_init(cert, vm->allocator_options, vm->parser_options);
+    vcvm_stack_value_init(value, vm->allocator_options);
+    vcvm_stack_value_set_cert(value, cert);
 
-    result = vm_push(vm, value);
+    result = vcvm_vm_push(vm, value);
     goto done;
 
 free_cert:
@@ -37,10 +37,10 @@ done:
     return result;
 }
 
-const instruction_t PUSH_CONTEXT_CERT = {
+const vcvm_instruction_t VCVM_PUSH_CONTEXT_CERT = {
     .name = "PUSH_CONTEXT_CERT",
     .arity = 0,
     .handler = {
-        .arity0 = &push_context_cert,
+        .arity0 = &vcvm_push_context_cert,
     }
 };

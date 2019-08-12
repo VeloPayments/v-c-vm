@@ -4,7 +4,7 @@
 
 static void stack_cert_dispose(void* ctx);
 
-int stack_cert_init(stack_cert_t* cert, allocator_options_t* allocator_options, vccert_parser_options_t* parser_options)
+int vcvm_stack_cert_init(vcvm_stack_cert_t* cert, allocator_options_t* allocator_options, vccert_parser_options_t* parser_options)
 {
     cert->allocator_options = allocator_options;
     cert->hdr.dispose = &stack_cert_dispose;
@@ -14,7 +14,7 @@ int stack_cert_init(stack_cert_t* cert, allocator_options_t* allocator_options, 
 
 void stack_cert_dispose(void* ctx)
 {
-    stack_cert_t* value = (stack_cert_t*)ctx;
+    vcvm_stack_cert_t* value = (vcvm_stack_cert_t*)ctx;
     dispose((disposable_t*)value->parser_context);
     release(value->allocator_options, value->parser_context);
 }
