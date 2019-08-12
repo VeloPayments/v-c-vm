@@ -194,11 +194,16 @@ void simple_copy(void* destination, const void* source, size_t size)
     memcpy(destination, source, size);
 }
 
+bool compare_function_constant(const void* x, const void* y)
+{
+    vcvm_function_constant_t* right = (vcvm_function_constant_t*)y;
+    return strcmp(right->value, (char*)x) == 0;
+}
+
 bool compare_int_constant(const void* x, const void* y)
 {
     vcvm_integer_constant_t* right = (vcvm_integer_constant_t*)y;
     int32_t left = *(int32_t*)x;
-
     return right->value == left;
 }
 
@@ -219,11 +224,5 @@ bool compare_uuid_constant(const void* x, const void* y)
 bool compare_string_constant(const void* x, const void* y)
 {
     vcvm_string_constant_t* right = (vcvm_string_constant_t*)y;
-    return strcmp(right->value, (char*)x) == 0;
-}
-
-bool compare_function_constant(const void* x, const void* y)
-{
-    vcvm_function_constant_t* right = (vcvm_function_constant_t*)y;
     return strcmp(right->value, (char*)x) == 0;
 }

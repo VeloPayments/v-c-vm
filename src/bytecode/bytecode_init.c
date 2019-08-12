@@ -1,4 +1,5 @@
 #include <vcvm/bytecode.h>
+#include <vpr/parameters.h>
 #include <vcvm/error_codes.h>
 #include <string.h>
 
@@ -67,7 +68,7 @@ int vcvm_bytecode_init(vcvm_bytecode_t* bytecode, allocator_options_t* allocator
 free_jmptable:
     bytecode_dispose_jmptable(bytecode);
 free_instructions:
-    vcvm_bytecode_dispose_instructions(bytecode);
+    bytecode_dispose_instructions(bytecode);
 free_intrinsic_constants:
     bytecode_dispose_intrinsic_constants(bytecode);
 free_uuid_constants:
@@ -87,6 +88,6 @@ void bytecode_dispose(void* ctx)
     bytecode_dispose_string_constants(bytecode);
     bytecode_dispose_uuid_constants(bytecode);
     bytecode_dispose_intrinsic_constants(bytecode);
-    vcvm_bytecode_dispose_instructions(bytecode);
+    bytecode_dispose_instructions(bytecode);
     bytecode_dispose_jmptable(bytecode);
 }

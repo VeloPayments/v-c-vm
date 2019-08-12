@@ -23,7 +23,7 @@ int bytecode_read_uuid_constants(vcvm_bytecode_t* bytecode, const uint8_t* raw, 
 int bytecode_read_intrinsic_constants(vcvm_bytecode_t* bytecode, const uint8_t* raw, size_t size, size_t* offset, vcvm_resolve_intrinsic_delegate_t pFunction);
 int bytecode_read_jmptable(vcvm_bytecode_t* bytecode, const uint8_t* raw, size_t size, size_t* offset);
 
-void vcvm_bytecode_dispose_instructions(vcvm_bytecode_t* bytecode);
+void bytecode_dispose_instructions(vcvm_bytecode_t* bytecode);
 void bytecode_dispose_string_constants(vcvm_bytecode_t* bytecode);
 void bytecode_dispose_integer_constants(vcvm_bytecode_t* bytecode);
 void bytecode_dispose_uuid_constants(vcvm_bytecode_t* bytecode);

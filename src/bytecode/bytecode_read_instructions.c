@@ -4,6 +4,8 @@
 #include <string.h>
 #include <stdint.h>
 #include "bytecode_internal.h"
+#include <netinet/in.h>
+
 
 int bytecode_read_instructions(vcvm_bytecode_t* bytecode, const uint8_t* raw, size_t size, size_t* offset)
 {
