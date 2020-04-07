@@ -28,11 +28,14 @@ add_project_arguments('-Wall', '-Werror', '-Wextra', language : 'cpp')
 src = run_command('find', './src', '-name', '*.c', '-or', '-name', '*.h', check : true).stdout().strip().split('\n')
 test_src = run_command('find', './test', '-name', '*.cpp', '-or', '-name', '*.h', check : true).stdout().strip().split('\n')
 
+cmake = import('cmake')
+
 # testing is currently only used on native x86 builds. Creating a disabler will disable the test exe and test target.
 if meson.is_cross_build()
   minunit = disabler()
 else
-  minunit = dependency('minunit', main : true, required : true)
+  minunit_proj = cmake.subproject('minunit')
+  minunit = minunit_proj.dependency('minunit')
 endif
 
 vpr = dependency(
